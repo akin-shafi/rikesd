@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes dashLineAnimation {
+  to {
+    background-position: 100% 0;
+  }
+}
+
+.rounded-lg, .rounded-md {
+  border-radius: 0.5rem;
+}
+
+.green-gradient-text {
+  background-image: linear-gradient(to right, #4ade80, #16a34a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dashed-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px dashed #32a852;
+  opacity: 0.4;
+  animation: rotate 60s linear infinite;
+}
+
+.dashed-line {
+  background: linear-gradient(90deg, #32a852 50%, transparent 50%);
+  background-size: 16px 4px;
+  background-position: 0px 0px;
+  animation: dashLineAnimation 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ecosystem-heading {
+  @apply text-4xl font-bold;
+}
+
+.ecosystem-heading span {
+  @apply text-green-500;
+}
