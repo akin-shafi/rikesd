@@ -116,7 +116,7 @@ export default function EventTracker() {
                 />
 
                 <Link
-                  href="#rsvp"
+                  href="https://docs.google.com/forms/d/13QD-YU5yNKh2zaL55XCrDQ9MegAuKSqY6fiv23fhlVI/viewform?edit_requested=true"
                   className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors flex items-center w-fit"
                 >
                   <span>Register Now</span>
@@ -149,7 +149,7 @@ export default function EventTracker() {
             </div>
             <Link
               className="px-3 py-1 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors flex items-center"
-              href="#rsvp"
+              href="https://docs.google.com/forms/d/13QD-YU5yNKh2zaL55XCrDQ9MegAuKSqY6fiv23fhlVI/viewform?edit_requested=true"
             >
               <span>Register</span>
               <svg
