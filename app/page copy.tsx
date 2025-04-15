@@ -1,14 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
-import { FaLinkedin, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
-import EventTracker from "@/components/event-tracker";
-import EventCard from "@/components/event-card";
-import FaqAccordion from "@/components/faq-accordion";
-import Header from "@/components/header";
-import PartnerLogo from "@/components/partner-logo";
-import EcosystemSection from "@/components/ecosystem-section";
-import AchievementCard from "@/components/achievement-card";
-import ProgramCard from "@/components/program-card";
+import Image from "next/image"
+import Link from "next/link"
+import { FaLinkedin, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa"
+import EventTracker from "@/components/event-tracker"
+import EventCard from "@/components/event-card"
+import FaqAccordion from "@/components/faq-accordion"
+import Header from "@/components/header"
+import PartnerLogo from "@/components/partner-logo"
+import EcosystemSection from "@/components/ecosystem-section"
+import AchievementCard from "@/components/achievement-card"
+import ProgramCard from "@/components/program-card"
 
 export default function Home() {
   return (
@@ -27,16 +27,12 @@ export default function Home() {
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div>
               <h1 className="mb-6 text-5xl font-bold leading-tight">
-                <span className="green-gradient-text">Empowering</span>{" "}
-                communities
+                <span className="green-gradient-text">Empowering</span> communities
               </h1>
-              <h2 className="mb-8 text-4xl font-bold text-gray-900">
-                through Research, Innovation, and Enterprise
-              </h2>
+              <h2 className="mb-8 text-4xl font-bold text-gray-900">through Research, Innovation, and Enterprise</h2>
               <p className="mb-8 text-xl text-gray-600">
-                RIKESD is a Pan-African led organization that is leading the
-                transformation of communities through Research, Innovation,
-                Knowledge, Enterprise and Sustainable Development.
+                RIKESD is a Pan-African led organization that is leading the transformation of communities through
+                Research, Innovation, Knowledge, Enterprise and Sustainable Development.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
@@ -55,7 +51,7 @@ export default function Home() {
             </div>
             <div className="relative h-[500px]">
               <Image
-                src="/innovation.png?height=1000&width=1000"
+                src="/placeholder.svg?height=1000&width=1000"
                 alt="RIKESD team collaboration"
                 fill
                 className="object-cover rounded-lg"
@@ -72,18 +68,15 @@ export default function Home() {
           <div className="grid gap-12 md:grid-cols-2">
             <div>
               <h2 className="mb-6 text-4xl font-bold">
-                <span className="green-gradient-text">
-                  A Lifetime of Impact
-                </span>
+                <span className="green-gradient-text">A Lifetime of Impact</span>
                 <br />
                 Starts Here
               </h2>
               <p className="mb-8 text-xl text-gray-600">
-                Whether you just have a research idea, are developing a
-                prototype, or already have an innovation with early adoption, we
-                can help. Since 2015, our highly-structured programs have given
-                researchers clarity on their next steps, critical feedback on
-                their innovations, and a global network to support their growth.
+                Whether you just have a research idea, are developing a prototype, or already have an innovation with
+                early adoption, we can help. Since 2015, our highly-structured programs have given researchers clarity
+                on their next steps, critical feedback on their innovations, and a global network to support their
+                growth.
               </p>
               <Link
                 href="#programs"
@@ -93,34 +86,12 @@ export default function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-6">
-              <AchievementCard
-                value={500}
-                label="Research Projects"
-                suffix="+"
-              />
-              <AchievementCard
-                value={15}
-                label="Research Funding"
-                prefix="$"
-                suffix="M+"
-              />
-              <AchievementCard
-                value={25}
-                label="Partner Countries"
-                suffix="+"
-              />
+              <AchievementCard value={500} label="Research Projects" suffix="+" />
+              <AchievementCard value={15} label="Research Funding" prefix="$" suffix="M+" />
+              <AchievementCard value={25} label="Partner Countries" suffix="+" />
               <AchievementCard value={100} label="Publications" suffix="+" />
-              <AchievementCard
-                value={1200}
-                label="Mentors & Advisors"
-                suffix="+"
-              />
-              <AchievementCard
-                value={50}
-                label="Estimated Impact Value"
-                prefix="$"
-                suffix="M"
-              />
+              <AchievementCard value={1200} label="Mentors & Advisors" suffix="+" />
+              <AchievementCard value={50} label="Estimated Impact Value" prefix="$" suffix="M" />
             </div>
           </div>
         </div>
@@ -132,8 +103,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold">Our Research Pathways</h2>
             <p className="text-xl text-gray-600">
-              We provide structured support at every stage of the research and
-              innovation journey
+              We provide structured support at every stage of the research and innovation journey
             </p>
           </div>
 
@@ -168,26 +138,16 @@ export default function Home() {
           <div className="grid gap-12 md:grid-cols-2">
             <div>
               <h2 className="mb-6 text-4xl font-bold">
-                Join a{" "}
-                <span className="green-gradient-text">Free Research</span> Event
+                Join a <span className="green-gradient-text">Free Research</span> Event
               </h2>
               <p className="mb-8 text-xl text-gray-600">
-                We exist to help researchers and innovators, so we run nearly
-                100 free events per year where you can meet local experts,
-                network with investors, learn from advisors, and connect with
-                collaborators.
+                We exist to help researchers and innovators, so we run nearly 100 free events per year where you can
+                meet local experts, network with investors, learn from advisors, and connect with collaborators.
               </p>
               <div className="relative h-[300px] rounded-xl overflow-hidden">
-                <Image
-                  src="/placeholder.svg?height=600&width=800"
-                  alt="RIKESD event"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/placeholder.svg?height=600&width=800" alt="RIKESD event" fill className="object-cover" />
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white bg-gradient-to-t from-black/80 to-transparent">
-                  <p className="text-lg font-medium">
-                    100% free events to get direction for your research
-                  </p>
+                  <p className="text-lg font-medium">100% free events to get direction for your research</p>
                 </div>
               </div>
             </div>
@@ -198,11 +158,7 @@ export default function Home() {
                 time="05:00pm +01"
                 featured={true}
               />
-              <EventCard
-                title="RIKESD Online Information Session"
-                date="Various Times"
-                time="Various Times"
-              />
+              <EventCard title="RIKESD Online Information Session" date="Various Times" time="Various Times" />
               <EventCard
                 title="Researcher Networking: Find a Collaboration Partner"
                 date="Apr 17, 2025"
@@ -246,8 +202,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold">Perks</h2>
             <p className="text-xl text-gray-600">
-              Over $2M in discounts and freebies from AWS, Google, Microsoft,
-              IBM, and more.
+              Over $2M in discounts and freebies from AWS, Google, Microsoft, IBM, and more.
             </p>
           </div>
 
@@ -282,8 +237,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold">Why Choose RIKESD</h2>
             <p className="text-xl text-gray-600">
-              We provide comprehensive support to researchers and innovators at
-              every stage of their journey.
+              We provide comprehensive support to researchers and innovators at every stage of their journey.
             </p>
           </div>
 
@@ -306,12 +260,9 @@ export default function Home() {
                   <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                 </svg>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                Knowledge Resources
-              </h3>
+              <h3 className="mb-3 text-xl font-semibold text-gray-900">Knowledge Resources</h3>
               <p className="text-gray-600">
-                Access to cutting-edge research, methodologies, and best
-                practices in your field.
+                Access to cutting-edge research, methodologies, and best practices in your field.
               </p>
             </div>
 
@@ -334,12 +285,9 @@ export default function Home() {
                   <path d="M8 12h8"></path>
                 </svg>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                Funding Opportunities
-              </h3>
+              <h3 className="mb-3 text-xl font-semibold text-gray-900">Funding Opportunities</h3>
               <p className="text-gray-600">
-                Connect with investors and funding sources specifically
-                interested in research-based innovations.
+                Connect with investors and funding sources specifically interested in research-based innovations.
               </p>
             </div>
 
@@ -363,12 +311,9 @@ export default function Home() {
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                Expert Community
-              </h3>
+              <h3 className="mb-3 text-xl font-semibold text-gray-900">Expert Community</h3>
               <p className="text-gray-600">
-                Join a network of researchers, innovators, and industry experts
-                to collaborate and share insights.
+                Join a network of researchers, innovators, and industry experts to collaborate and share insights.
               </p>
             </div>
 
@@ -389,12 +334,9 @@ export default function Home() {
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                Global Recognition
-              </h3>
+              <h3 className="mb-3 text-xl font-semibold text-gray-900">Global Recognition</h3>
               <p className="text-gray-600">
-                Showcase your work on an international platform and gain
-                visibility for your innovations.
+                Showcase your work on an international platform and gain visibility for your innovations.
               </p>
             </div>
           </div>
@@ -406,12 +348,10 @@ export default function Home() {
         <div className="container px-4 mx-auto">
           <div className="max-w-3xl mx-auto mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold">
-              Frequently Asked{" "}
-              <span className="green-gradient-text">Questions</span>
+              Frequently Asked <span className="green-gradient-text">Questions</span>
             </h2>
             <p className="text-xl text-gray-600">
-              Find answers to common questions about RIKESD programs and
-              opportunities.
+              Find answers to common questions about RIKESD programs and opportunities.
             </p>
           </div>
 
@@ -454,13 +394,10 @@ export default function Home() {
         <div className="container px-4 mx-auto">
           <div className="grid gap-12 md:grid-cols-2">
             <div>
-              <h2 className="mb-6 text-4xl font-bold">
-                Have questions about research, innovation, or development?
-              </h2>
+              <h2 className="mb-6 text-4xl font-bold">Have questions about research, innovation, or development?</h2>
               <p className="mb-8 text-xl text-gray-600">
-                Our team is available 24/7 to assist you with any inquiries
-                related to our programs, partnerships, or how you can get
-                involved.
+                Our team is available 24/7 to assist you with any inquiries related to our programs, partnerships, or
+                how you can get involved.
               </p>
 
               <div className="space-y-6">
@@ -483,12 +420,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">
-                      Our Location
-                    </h3>
-                    <p className="mt-1 text-gray-600">
-                      123 Logan Street, Abuja, Nigeria
-                    </p>
+                    <h3 className="text-lg font-medium text-gray-900">Our Location</h3>
+                    <p className="mt-1 text-gray-600">123 Logan Street, Abuja, Nigeria</p>
                   </div>
                 </div>
 
@@ -511,9 +444,7 @@ export default function Home() {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900">Phone</h3>
-                    <p className="mt-1 text-gray-600">
-                      +234 703 XXX XXXX, +234 708 XXX XXXX
-                    </p>
+                    <p className="mt-1 text-gray-600">+234 703 XXX XXXX, +234 708 XXX XXXX</p>
                   </div>
                 </div>
 
@@ -544,16 +475,11 @@ export default function Home() {
             </div>
 
             <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-              <h3 className="mb-6 text-xl font-semibold text-gray-900">
-                I would like to discuss:
-              </h3>
+              <h3 className="mb-6 text-xl font-semibold text-gray-900">I would like to discuss:</h3>
               <form>
                 <div className="grid gap-6">
                   <div>
-                    <label
-                      htmlFor="name"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-700">
                       Your Name
                     </label>
                     <input
@@ -566,10 +492,7 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
                       Your Email
                     </label>
                     <input
@@ -582,10 +505,7 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="subject"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="subject" className="block mb-2 text-sm font-medium text-gray-700">
                       Subject
                     </label>
                     <select
@@ -595,25 +515,16 @@ export default function Home() {
                       required
                     >
                       <option value="">Select a topic</option>
-                      <option value="Research Collaboration">
-                        Research Collaboration
-                      </option>
-                      <option value="Funding Opportunities">
-                        Funding Opportunities
-                      </option>
+                      <option value="Research Collaboration">Research Collaboration</option>
+                      <option value="Funding Opportunities">Funding Opportunities</option>
                       <option value="Expert Community">Expert Community</option>
-                      <option value="Knowledge Marketplace">
-                        Knowledge Marketplace
-                      </option>
+                      <option value="Knowledge Marketplace">Knowledge Marketplace</option>
                       <option value="Other">Other</option>
                     </select>
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="message"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
+                    <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-700">
                       Your Message
                     </label>
                     <textarea
@@ -648,21 +559,21 @@ export default function Home() {
                   Stay updated with our latest insights
                 </h2>
                 <p className="text-green-50">
-                  Subscribe to our newsletter to receive updates on research
-                  opportunities, events, and innovation trends.
+                  Subscribe to our newsletter to receive updates on research opportunities, events, and innovation
+                  trends.
                 </p>
               </div>
               <div className="flex items-center">
-                <form className="flex w-full max-w-md flex-col gap-2 md:flex-row">
+                <form className="flex w-full max-w-md gap-2">
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="flex-1 px-4 py-3 text-gray-900 bg-white border-0 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 w-full"
+                    className="flex-1 px-4 py-3 text-gray-900 bg-white border-0 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                     required
                   />
                   <button
                     type="submit"
-                    className="px-6 py-3 font-medium text-white transition-colors bg-gray-800 rounded-md hover:bg-gray-900 w-full md:w-auto"
+                    className="px-6 py-3 font-medium text-white transition-colors bg-gray-800 rounded-md hover:bg-gray-900"
                   >
                     Subscribe
                   </button>
@@ -689,10 +600,9 @@ export default function Home() {
                 <span className="text-xl font-bold text-gray-900">RIKESD</span>
               </div>
               <p className="mb-6 text-gray-600">
-                RIKESD is the world's most proven network to turn research into
-                impactful solutions, and innovations into global enterprises.
-                Since 2015, our structured programs have helped over 500
-                researchers and innovators make an impact.
+                RIKESD is the world's most proven network to turn research into impactful solutions, and innovations
+                into global enterprises. Since 2015, our structured programs have helped over 500 researchers and
+                innovators make an impact.
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-gray-900">
@@ -711,47 +621,30 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="mb-6 text-lg font-medium text-gray-900">
-                About Us
-              </h3>
+              <h3 className="mb-6 text-lg font-medium text-gray-900">About Us</h3>
               <ul className="space-y-4">
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Company
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Core Program
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Global Locations
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Research Events
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Press
                   </Link>
                 </li>
@@ -759,47 +652,30 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="mb-6 text-lg font-medium text-gray-900">
-                Support
-              </h3>
+              <h3 className="mb-6 text-lg font-medium text-gray-900">Support</h3>
               <ul className="space-y-4">
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Apply to a Cohort
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Contact Us
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Agreements
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Research Resources
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     FAQ
                   </Link>
                 </li>
@@ -807,47 +683,30 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="mb-6 text-lg font-medium text-gray-900">
-                Innovation
-              </h3>
+              <h3 className="mb-6 text-lg font-medium text-gray-900">Innovation</h3>
               <ul className="space-y-4">
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Launch an RIKESD Chapter
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Launch a Research Fund
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Partner with RIKESD
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Economic Development
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
-                    className="text-gray-600 hover:green-gradient-text"
-                  >
+                  <Link href="#" className="text-gray-600 hover:green-gradient-text">
                     Corporate Partnerships
                   </Link>
                 </li>
@@ -857,26 +716,15 @@ export default function Home() {
 
           <div className="pt-8 mt-12 border-t border-gray-200">
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <p className="text-gray-600">
-                © Copyright 2023 RIKESD Inc. All rights reserved.
-              </p>
+              <p className="text-gray-600">© Copyright 2023 RIKESD Inc. All rights reserved.</p>
               <div className="flex gap-6">
-                <Link
-                  href="#"
-                  className="text-sm text-gray-600 hover:green-gradient-text"
-                >
+                <Link href="#" className="text-sm text-gray-600 hover:green-gradient-text">
                   Terms of Use
                 </Link>
-                <Link
-                  href="#"
-                  className="text-sm text-gray-600 hover:green-gradient-text"
-                >
+                <Link href="#" className="text-sm text-gray-600 hover:green-gradient-text">
                   Privacy Policy
                 </Link>
-                <Link
-                  href="#"
-                  className="text-sm text-gray-600 hover:green-gradient-text"
-                >
+                <Link href="#" className="text-sm text-gray-600 hover:green-gradient-text">
                   Code of Conduct
                 </Link>
               </div>
@@ -885,5 +733,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  );
+  )
 }
