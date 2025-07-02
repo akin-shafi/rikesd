@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Linkedin, Twitter, ExternalLink } from "lucide-react";
 
 interface TeamMember {
-  id: string;
+  id: string; 
   name: string;
   designation: string;
   image: string;

@@ -11,7 +11,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { useTeamMembers } from "@/hooks/useTeamMembers";
-import TeamMemberCard from "@/components/team-member-card";
+import TeamMemberCard from "@/components/team-member-card"; 
 
 const teamCategories = [
   {
