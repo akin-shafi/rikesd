@@ -1,230 +1,209 @@
-"use client";
+import Image from "next/image";
+import Link from "next/link";
 
-import { useState } from "react";
-import { Calendar, Users } from "lucide-react";
-import ProjectModal from "./project-modal";
-
-interface Project {
-  id: string;
+interface ProjectCardProps {
   title: string;
   description: string;
-  longDescription?: string;
+  features: string[];
   image: string;
+  link?: string;
   category: string;
-  status: string;
-  progress: number;
-  team: string[];
-  technologies: string[];
-  startDate: string;
-  endDate?: string;
-  budget?: string;
-  impact?: string;
-  achievements?: string[];
-  links?: {
-    demo?: string;
-    github?: string;
-    documentation?: string;
-  };
 }
 
-const projects: Project[] = [
-  {
-    id: "arofarmer",
-    title: "AroFarmer",
-    description:
-      "Digital platform connecting farmers with agricultural resources and market opportunities.",
-    longDescription:
-      "AroFarmer is a comprehensive digital platform designed to revolutionize agricultural practices by connecting farmers with essential resources, market opportunities, and expert knowledge. The platform provides real-time market prices, weather forecasts, crop management tools, and direct access to buyers and suppliers.",
-    image: "/placeholder.svg?height=300&width=400",
-    category: "AgTech",
-    status: "Active",
-    progress: 75,
-    team: ["Dr. Sarah Johnson", "Michael Chen", "Aisha Patel", "James Wilson"],
-    technologies: ["React", "Node.js", "MongoDB", "React Native", "AWS"],
-    startDate: "2024-01-15",
-    budget: "$150,000",
-    impact: "500+ farmers onboarded, 25% increase in crop yields",
-    achievements: [
-      "Successfully onboarded 500+ farmers across 3 regions",
-      "Achieved 25% average increase in crop yields",
-      "Reduced post-harvest losses by 30%",
-      "Created direct market linkages for 200+ farmers",
-    ],
-    links: {
-      demo: "https://arofarmer-demo.com",
-      github: "https://github.com/rikesd/arofarmer",
-      documentation: "https://docs.arofarmer.com",
-    },
-  },
-  {
-    id: "healthtrack",
-    title: "HealthTrack",
-    description:
-      "AI-powered health monitoring system for rural communities with limited healthcare access.",
-    longDescription:
-      "HealthTrack leverages artificial intelligence and mobile technology to provide comprehensive health monitoring solutions for underserved rural communities. The system includes symptom tracking, medication reminders, telemedicine capabilities, and emergency response features.",
-    image: "/placeholder.svg?height=300&width=400",
-    category: "HealthTech",
-    status: "Active",
-    progress: 60,
-    team: [
-      "Dr. Emily Rodriguez",
-      "David Kim",
-      "Fatima Al-Zahra",
-      "Robert Taylor",
-    ],
-    technologies: [
-      "Python",
-      "TensorFlow",
-      "Flutter",
-      "Firebase",
-      "Google Cloud",
-    ],
-    startDate: "2024-03-01",
-    budget: "$200,000",
-    impact: "1000+ patients monitored, 40% reduction in emergency visits",
-    achievements: [
-      "Deployed in 5 rural health centers",
-      "Monitored 1000+ patients remotely",
-      "Reduced emergency hospital visits by 40%",
-      "Trained 50+ community health workers",
-    ],
-    links: {
-      demo: "https://healthtrack-demo.com",
-      documentation: "https://docs.healthtrack.com",
-    },
-  },
-  {
-    id: "educonnect",
-    title: "EduConnect",
-    description:
-      "Online learning platform bridging educational gaps in remote areas through interactive content.",
-    longDescription:
-      "EduConnect is an innovative online learning platform specifically designed to address educational challenges in remote and underserved areas. The platform offers interactive content, virtual classrooms, offline capabilities, and personalized learning paths to ensure quality education reaches every student.",
-    image: "/placeholder.svg?height=300&width=400",
-    category: "EdTech",
-    status: "Completed",
-    progress: 100,
-    team: [
-      "Prof. Maria Santos",
-      "Alex Thompson",
-      "Priya Sharma",
-      "Omar Hassan",
-    ],
-    technologies: ["Vue.js", "Django", "PostgreSQL", "WebRTC", "Docker"],
-    startDate: "2023-06-01",
-    endDate: "2024-02-28",
-    budget: "$120,000",
-    impact: "2000+ students enrolled, 85% completion rate",
-    achievements: [
-      "Successfully enrolled 2000+ students",
-      "Achieved 85% course completion rate",
-      "Deployed in 15 remote schools",
-      "Trained 100+ teachers on digital pedagogy",
-      "Won 'Best EdTech Innovation' award 2024",
-    ],
-    links: {
-      demo: "https://educonnect-demo.com",
-      github: "https://github.com/rikesd/educonnect",
-    },
-  },
-];
+function ProjectCard({
+  title,
+  description,
+  features,
+  image,
+  link,
+  category,
+}: ProjectCardProps) {
+  return (
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all">
+      <div className="relative h-48 bg-gray-100">
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover"
+        />
+        <div className="absolute top-4 left-4">
+          <span className="px-3 py-1 text-xs font-medium bg-green-500 text-white rounded-full">
+            {category}
+          </span>
+        </div>
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
+        <p className="text-gray-600 mb-4">{description}</p>
+        <div className="mb-6">
+          <h4 className="text-sm font-medium text-gray-900 mb-2">
+            Key Features:
+          </h4>
+          <ul className="space-y-1">
+            {features.map((feature, index) => (
+              <li
+                key={index}
+                className="flex items-start text-sm text-gray-600"
+              >
+                <svg
+                  className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* {link && (
+          <Link
+            href={link}
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 border border-green-600 rounded-md hover:bg-green-50 transition-colors"
+          >
+            Learn More
+            <svg
+              className="w-4 h-4 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
+        )} */}
+      </div>
+    </div>
+  );
+}
 
 export default function ProjectShowcase() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const projects = [
+    {
+      title: "Skillnovate",
+      category: "Education",
+      description:
+        "An upskilling and reskilling platform designed for professionals seeking career growth through both online and physical training sessions.",
+      features: [
+        "Online and physical training sessions",
+        "Administrative and technical courses",
+        "Career advancement programs",
+        "Professional certification",
+      ],
+      image: "/placeholder.svg?height=200&width=400",
+      link: "#skillnovate",
+    },
+    {
+      title: "KEIA",
+      category: "Incubation",
+      description:
+        "Knowledge Enterprise for Incubation and Acceleration supports startups with promising products through structured programs.",
+      features: [
+        "Structured incubation programs",
+        "Product refinement guidance",
+        "Investor connections",
+        "Marketplace access",
+      ],
+      image: "/placeholder.svg?height=200&width=400",
+      link: "#keia",
+    },
+    {
+      title: "Rike Marketplace",
+      category: "Knowledge",
+      description:
+        "A Knowledge-as-a-Service platform for buying and selling research outputs, partnered with AroFarmer Initiative.",
+      features: [
+        "Research output marketplace",
+        "Knowledge-as-a-Service platform",
+        "Partnership integrations",
+        "Research commercialization",
+      ],
+      image: "/placeholder.svg?height=200&width=400",
+      link: "#rike-marketplace",
+    },
+    {
+      title: "AroFarmer",
+      category: "Agriculture",
+      description:
+        "A tech-driven urban agriculture platform transforming underutilized urban spaces into productive micro-farms.",
+      features: [
+        "Urban space transformation",
+        "Landowner-grower matching",
+        "Income generation for space owners",
+        "Community-driven farming",
+      ],
+      image: "/placeholder.svg?height=200&width=400",
+      link: "#arofarmer",
+    },
+    {
+      title: "Patch Africa",
+      category: "Environment",
+      description:
+        "Pan-African Circular Hotspot promoting carbon emission reduction and access to carbon credits through green initiatives.",
+      features: [
+        "Waste for Meal Program",
+        "Campus Free Waste Initiative",
+        "Carbon credit access",
+        "University collaborations",
+      ],
+      image: "/placeholder.svg?height=200&width=400",
+      link: "#patch-africa",
+    },
+  ];
 
   return (
-    <section id="projects" className="py-20 bg-white/50 backdrop-blur-sm">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Our <span className="text-green-500">Projects</span>
+    <section id="projects" className="py-20 bg-gray-50">
+      <div className="container px-4 mx-auto max-w-6xl">
+        <div className="max-w-3xl mx-auto mb-16 text-center">
+          <h2 className="mb-4 text-4xl font-bold">
+            Our <span className="green-gradient-text">Project Portfolio</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover our innovative projects that are making a real difference
-            in communities across Africa and beyond.
+          <p className="text-xl text-gray-600">
+            Discover the diverse range of initiatives under RIKESD, each
+            operating in different ecosystems to create meaningful impact across
+            various sectors.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group"
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute top-4 left-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      project.status === "Active"
-                        ? "bg-green-500 text-white"
-                        : project.status === "Completed"
-                        ? "bg-blue-500 text-white"
-                        : "bg-yellow-500 text-white"
-                    }`}
-                  >
-                    {project.status}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-                    {project.category}
-                  </span>
-                  <span className="text-sm font-medium text-green-600">
-                    {project.progress}%
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">
-                  {project.description}
-                </p>
-
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                  <div className="flex items-center">
-                    <Users className="w-4 h-4 mr-1" />
-                    <span>{project.team.length} members</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    <span>{new Date(project.startDate).getFullYear()}</span>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-green-500 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${project.progress}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {projects.map((project, index) => (
+            <ProjectCard key={index} {...project} />
           ))}
         </div>
-      </div>
 
-      {/* Project Modal */}
-      {selectedProject && (
-        <ProjectModal
-          isOpen={!!selectedProject}
-          onClose={() => setSelectedProject(null)}
-          project={selectedProject}
-        />
-      )}
+        <div className="text-center">
+          <Link
+            href="#all-projects"
+            className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors"
+          >
+            Explore All Projects
+            <svg
+              className="w-5 h-5 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }
