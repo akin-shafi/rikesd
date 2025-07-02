@@ -1,148 +1,244 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Terms of Service",
-  description:
-    "Terms of Service for RIKESD - Research, Innovation, Knowledge, Enterprise & Sustainable Development",
-};
+import { useState } from "react";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  Users,
+  Award,
+  Target,
+  TrendingUp,
+  Briefcase,
+} from "lucide-react";
+import { useTeamMembers } from "@/hooks/useTeamMembers";
+import TeamMemberCard from "@/components/team-member-card";
 
-export default function TermsPage() {
+const teamCategories = [
+  {
+    id: "governors",
+    name: "Board of Governors",
+    description: "Strategic leadership and governance oversight",
+    icon: Award,
+    color: "from-purple-500 to-purple-600",
+  },
+  {
+    id: "advisors",
+    name: "Board of Advisors",
+    description: "Expert guidance and strategic counsel",
+    icon: Target,
+    color: "from-blue-500 to-blue-600",
+  },
+  {
+    id: "finance",
+    name: "Board of Finance",
+    description: "Financial oversight and investment strategy",
+    icon: TrendingUp,
+    color: "from-green-500 to-green-600",
+  },
+  {
+    id: "experts",
+    name: "Board of Experts",
+    description: "Technical expertise and research guidance",
+    icon: Users,
+    color: "from-orange-500 to-orange-600",
+  },
+  {
+    id: "emt",
+    name: "EMT Members",
+    description: "Executive management and operations",
+    icon: Briefcase,
+    color: "from-red-500 to-red-600",
+  },
+] as const;
+
+export default function TeamsPage() {
+  const { teamMembers, loading, error, getTeamMembersByCategory } =
+    useTeamMembers();
+  const [activeTab, setActiveTab] = useState<
+    "governors" | "advisors" | "finance" | "experts" | "emt"
+  >("governors");
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading team members...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const currentMembers = getTeamMembersByCategory(activeTab);
+  const activeCategory = teamCategories.find((cat) => cat.id === activeTab);
+
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8 display-text">
-            Terms of Service
-          </h1>
+    <div className="min-h-screen">
+      {/* Header */}
+      <div className="bg-content border-b border-gray-200 pt-28">
+        <div className="container px-4 mx-auto max-w-7xl py-8">
+          <div className="flex items-center gap-4 mb-6">
+            <Link
+              href="/"
+              className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              Back to Home
+            </Link>
+          </div>
 
-          <div className="prose prose-lg max-w-none">
-            <p className="text-gray-600 mb-8">
-              Last updated: {new Date().toLocaleDateString()}
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Meet Our <span className="text-green-500">Leadership Team</span>
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our diverse team of experts, leaders, and innovators driving
+              RIKESD's mission to transform research into impactful solutions
+              across Africa and beyond.
             </p>
+          </div>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                1. Acceptance of Terms
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                By accessing and using the RIKESD website and services, you
-                accept and agree to be bound by the terms and provision of this
-                agreement. If you do not agree to abide by the above, please do
-                not use this service.
-              </p>
-            </section>
+          {/* Category Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+            {teamCategories.map((category) => {
+              const memberCount = getTeamMembersByCategory(
+                category.id as any
+              ).length;
+              const IconComponent = category.icon;
+              return (
+                <div
+                  key={category.id}
+                  className="text-center p-4 bg-gray-50 rounded-lg"
+                >
+                  <div
+                    className={`w-12 h-12 mx-auto mb-2 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center`}
+                  >
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold text-gray-900">
+                    {memberCount}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    {category.name.replace("Board of ", "").replace("EMT ", "")}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                2. Description of Service
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                RIKESD provides research, innovation, knowledge sharing,
-                enterprise development, and sustainable development services
-                through our platform. Our services include but are not limited
-                to:
-              </p>
-              <ul className="list-disc list-inside text-gray-700 mb-4 space-y-2">
-                <li>Research collaboration and funding opportunities</li>
-                <li>Innovation labs and incubation programs</li>
-                <li>Educational events and workshops</li>
-                <li>Partnership facilitation</li>
-                <li>Knowledge sharing platforms</li>
-              </ul>
-            </section>
+      {/* Team Categories Tabs */}
+      <div className="bg-white border-b border-gray-200 sticky top-20 z-40">
+        <div className="container px-4 mx-auto max-w-7xl">
+          <div className="flex overflow-x-auto scrollbar-hide">
+            {teamCategories.map((category) => {
+              const IconComponent = category.icon;
+              const memberCount = getTeamMembersByCategory(
+                category.id as any
+              ).length;
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveTab(category.id as any)}
+                  className={`flex items-center gap-3 px-6 py-4 font-medium border-b-2 transition-colors whitespace-nowrap ${
+                    activeTab === category.id
+                      ? "border-green-500 text-green-600 bg-green-50"
+                      : "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  <div
+                    className={`w-8 h-8 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center`}
+                  >
+                    <IconComponent className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold">{category.name}</div>
+                    <div className="text-xs opacity-75">
+                      {memberCount} members
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                3. User Responsibilities
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Users are responsible for:
-              </p>
-              <ul className="list-disc list-inside text-gray-700 mb-4 space-y-2">
-                <li>Providing accurate and complete information</li>
-                <li>Maintaining the confidentiality of account credentials</li>
-                <li>Complying with all applicable laws and regulations</li>
-                <li>Respecting intellectual property rights</li>
-                <li>Using services for legitimate purposes only</li>
-              </ul>
-            </section>
+      {/* Team Members Content */}
+      <div className="container px-4 mx-auto max-w-7xl py-12">
+        {/* Active Category Header */}
+        {activeCategory && (
+          <div className="text-center mb-12">
+            <div
+              className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${activeCategory.color} flex items-center justify-center`}
+            >
+              <activeCategory.icon className="w-8 h-8 text-white" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              {activeCategory.name}
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              {activeCategory.description}
+            </p>
+          </div>
+        )}
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                4. Intellectual Property
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                All content, materials, and intellectual property on this
-                platform remain the property of RIKESD or their respective
-                owners. Users may not reproduce, distribute, or create
-                derivative works without explicit permission.
-              </p>
-            </section>
+        {/* Team Members Grid */}
+        {currentMembers.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600 text-lg">
+              No team members found in this category.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {currentMembers.map((member) => (
+              <TeamMemberCard key={member.id} member={member} />
+            ))}
+          </div>
+        )}
+      </div>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                5. Privacy and Data Protection
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Your privacy is important to us. Please review our Privacy
-                Policy to understand how we collect, use, and protect your
-                personal information.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                6. Limitation of Liability
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                RIKESD shall not be liable for any indirect, incidental,
-                special, consequential, or punitive damages, including without
-                limitation, loss of profits, data, use, goodwill, or other
-                intangible losses.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                7. Termination
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                We may terminate or suspend your account and access to our
-                services immediately, without prior notice or liability, for any
-                reason whatsoever, including without limitation if you breach
-                the Terms.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                8. Changes to Terms
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                We reserve the right to modify or replace these Terms at any
-                time. If a revision is material, we will try to provide at least
-                30 days notice prior to any new terms taking effect.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                9. Contact Information
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                If you have any questions about these Terms of Service, please
-                contact us at:
-              </p>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="text-gray-700">
-                  <strong>Email:</strong> legal@rikesd.org
-                  <br />
-                  <strong>Phone:</strong> +234 806 630 1780
-                  <br />
-                  <strong>Address:</strong> 123 Logan Street, Abuja, Nigeria
-                </p>
-              </div>
-            </section>
+      {/* Call to Action */}
+      <div className="bg-gradient-to-r from-green-500 to-green-600 py-16">
+        <div className="container px-4 mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Join Our Mission
+          </h2>
+          <p className="text-xl text-green-100 mb-8">
+            Interested in contributing to RIKESD's vision? We're always looking
+            for passionate individuals to join our team and advisory boards.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="#careers"
+              className="px-8 py-3 bg-white text-green-600 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+            >
+              View Open Positions
+            </Link>
+            <Link
+              href="#contact"
+              className="px-8 py-3 border-2 border-white text-white rounded-lg font-medium hover:bg-white hover:text-green-600 transition-colors"
+            >
+              Get in Touch
+            </Link>
           </div>
         </div>
       </div>

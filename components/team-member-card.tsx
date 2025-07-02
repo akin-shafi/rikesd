@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Linkedin, Twitter, Mail, ExternalLink } from "lucide-react";
+import { Linkedin, Twitter, ExternalLink } from "lucide-react";
 
 interface TeamMember {
   id: string;
@@ -14,7 +14,6 @@ interface TeamMember {
   achievements: string[];
   linkedin?: string;
   twitter?: string;
-  email?: string;
   website?: string;
 }
 
@@ -25,17 +24,28 @@ interface TeamMemberCardProps {
 export default function TeamMemberCard({ member }: TeamMemberCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Check if the image field contains initials (2 uppercase letters)
+  const isInitials = /^[A-Z]{2}$/.test(member.image);
+
   return (
     <div className="group relative bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
       {/* Card Header */}
       <div className="relative h-64 bg-gradient-to-br from-green-400 to-green-600 overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
-        <Image
-          src={member.image || "/placeholder.svg"}
-          alt={member.name}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
-        />
+        {isInitials ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-32 h-32 bg-white/90 rounded-full flex items-center justify-center text-4xl font-bold text-green-600">
+              {member.image}
+            </div>
+          </div>
+        ) : (
+          <Image
+            src={member.image || "/placeholder.svg"}
+            alt={member.name}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        )}
         <div className="absolute bottom-4 left-4 right-4">
           <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3">
             <h3 className="font-bold text-gray-900 text-lg">{member.name}</h3>
@@ -90,14 +100,6 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
                 className="p-2 text-gray-400 hover:text-blue-400 transition-colors"
               >
                 <Twitter className="w-4 h-4" />
-              </a>
-            )}
-            {member.email && (
-              <a
-                href={`mailto:${member.email}`}
-                className="p-2 text-gray-400 hover:text-green-600 transition-colors"
-              >
-                <Mail className="w-4 h-4" />
               </a>
             )}
           </div>
