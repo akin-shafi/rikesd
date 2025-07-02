@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
+import { useRouter } from "next/navigation";
+import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,13 +36,26 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
+  const handleNavigation = (sectionId: string) => {
+    setIsMenuOpen(false);
+
+    if (window.location.pathname !== "/") {
+      router.push(`/#${sectionId}`);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-sm" : "bg-transparent"
+        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-sm" : "bg-transparent"
       }`}
     >
-      <div className="container px-4 mx-auto">
+      <div className="container px-6 mx-auto">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
@@ -52,80 +67,77 @@ export default function Header() {
                 height={150}
                 className="mr-2"
               />
-              {/* <span
-                className={`text-xl font-bold ${
-                  isScrolled ? "text-gray-900" : "text-gray-900"
-                }`}
-              >
-                RIKESD
-              </span> */}
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex lg:items-center lg:space-x-1">
-            <NavItem
-              href="#research"
-              label="Research"
-              isScrolled={isScrolled}
-            />
-            <NavItem
-              href="#investors"
-              label="Investors"
-              isScrolled={isScrolled}
-            />
-            <NavItem href="#events" label="Events" isScrolled={isScrolled} />
-            <NavItem href="#reviews" label="Reviews" isScrolled={isScrolled} />
-            <NavItem href="#alumni" label="Alumni" isScrolled={isScrolled} />
-            <NavItem
-              href="#resources"
-              label="Resources"
-              isScrolled={isScrolled}
-            />
-            <NavItem
-              href="#partnerships"
-              label="Partnerships"
-              isScrolled={isScrolled}
-            />
-            <NavItem href="#about" label="About" isScrolled={isScrolled} />
-          </nav>
-
-          {/* Location & CTA Buttons */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-4">
-            <div
-              className={`flex items-center ${
-                isScrolled ? "text-gray-700" : "text-gray-900"
+            <button
+              onClick={() => handleNavigation("programs")}
+              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
+                isScrolled
+                  ? "text-gray-700 hover:text-gray-900"
+                  : "text-gray-900 hover:text-gray-900"
               }`}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mr-1"
-              >
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span className="text-sm font-medium">Abuja</span>
-            </div>
-            <Link
-              href="#apply"
-              className="px-4 py-2 text-sm font-medium text-white transition-colors bg-green-500  rounded-lg hover:bg-green-600"
+              Programs
+            </button>
+            <button
+              onClick={() => handleNavigation("projects")}
+              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
+                isScrolled
+                  ? "text-gray-700 hover:text-gray-900"
+                  : "text-gray-900 hover:text-gray-900"
+              }`}
             >
-              Apply
+              Projects
+            </button>
+            <Link
+              href="/events"
+              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
+                isScrolled
+                  ? "text-gray-700 hover:text-gray-900"
+                  : "text-gray-900 hover:text-gray-900"
+              }`}
+            >
+              Events
             </Link>
             <Link
-              href="#signin"
-              className="px-4 py-2 text-sm font-medium transition-colors border border-green-500  rounded-lg text-green-500 hover:bg-green-50"
+              href="/teams"
+              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
+                isScrolled
+                  ? "text-gray-700 hover:text-gray-900"
+                  : "text-gray-900 hover:text-gray-900"
+              }`}
             >
-              Sign in
+              Teams
             </Link>
+            <Link
+              href="/partners"
+              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
+                isScrolled
+                  ? "text-gray-700 hover:text-gray-900"
+                  : "text-gray-900 hover:text-gray-900"
+              }`}
+            >
+              Partners
+            </Link>
+          </nav>
+
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-6">
+            <button
+              onClick={() => handleNavigation("apply")}
+              className="px-4 py-2 text-sm font-medium text-white transition-colors bg-green-500 rounded-lg hover:bg-green-600"
+            >
+              Apply Now
+            </button>
+            <button
+              onClick={() => handleNavigation("contact")}
+              className="px-4 py-2 text-sm font-medium transition-colors border border-green-500 rounded-lg text-green-500 hover:bg-green-50"
+            >
+              Get Started
+            </button>
           </div>
 
           {/* Tablet/Mobile Menu Button */}
@@ -142,7 +154,7 @@ export default function Header() {
               aria-label="Toggle navigation menu"
             >
               <span className="sr-only">Open main menu</span>
-              <FiMenu className="w-6 h-6" />
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -164,178 +176,68 @@ export default function Header() {
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-xl font-medium text-gray-900">Main Menu</h2>
+          <h2 className="text-xl font-medium text-gray-900">Menu</h2>
           <button
             type="button"
             className="p-2 text-gray-500 rounded-md hover:text-gray-900 hover:bg-gray-100"
             onClick={() => setIsMenuOpen(false)}
             aria-label="Close menu"
           >
-            <FiX className="w-6 h-6" />
+            <X className="w-6 h-6" />
           </button>
         </div>
 
         <nav className="px-4 py-2">
-          <MobileNavItem
-            href="#research"
-            label="Research"
+          <button
+            onClick={() => handleNavigation("programs")}
+            className="block w-full py-3 text-left text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
+          >
+            Programs
+          </button>
+          <button
+            onClick={() => handleNavigation("projects")}
+            className="block w-full py-3 text-left text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
+          >
+            Projects
+          </button>
+          <Link
+            href="/events"
+            className="block py-3 text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
             onClick={() => setIsMenuOpen(false)}
-          />
-          <MobileNavItem
-            href="#investors"
-            label="Investors"
+          >
+            Events
+          </Link>
+          <Link
+            href="/teams"
+            className="block py-3 text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
             onClick={() => setIsMenuOpen(false)}
-          />
-          <MobileNavItem
-            href="#events"
-            label="Events"
+          >
+            Teams
+          </Link>
+          <Link
+            href="/partners"
+            className="block py-3 text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
             onClick={() => setIsMenuOpen(false)}
-          />
-          <MobileNavItem
-            href="#reviews"
-            label="Reviews"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          <MobileNavItem
-            href="#alumni"
-            label="Alumni"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          <MobileNavItem
-            href="#resources"
-            label="Resources"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          <MobileNavItem
-            href="#partnerships"
-            label="Partnerships"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          <MobileNavItem
-            href="#about"
-            label="About"
-            onClick={() => setIsMenuOpen(false)}
-          />
+          >
+            Partners
+          </Link>
 
           <div className="pt-4 mt-4 border-t border-gray-200">
-            <div className="flex items-center mb-4 text-gray-700">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mr-2"
-              >
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span className="text-sm font-medium">Lagos</span>
-            </div>
-            <Link
-              href="#apply"
+            <button
+              onClick={() => handleNavigation("apply")}
               className="block w-full px-4 py-2 mb-3 text-sm font-medium text-center text-white bg-green-500 rounded-md hover:bg-green-600"
-              onClick={() => setIsMenuOpen(false)}
             >
-              Apply
-            </Link>
-            <Link
-              href="#signin"
+              Apply Now
+            </button>
+            <button
+              onClick={() => handleNavigation("contact")}
               className="block w-full px-4 py-2 text-sm font-medium text-center border border-green-500 rounded-md text-green-500 hover:bg-green-50"
-              onClick={() => setIsMenuOpen(false)}
             >
-              Sign in
-            </Link>
+              Get Started
+            </button>
           </div>
         </nav>
       </div>
     </header>
-  );
-}
-
-interface NavItemProps {
-  href: string;
-  label: string;
-  isScrolled: boolean;
-}
-
-function NavItem({ href, label, isScrolled }: NavItemProps) {
-  return (
-    <Link
-      href={href}
-      className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 flex items-center ${
-        isScrolled
-          ? "text-gray-700 hover:text-gray-900"
-          : "text-gray-900 hover:text-gray-900"
-      }`}
-    >
-      {label}
-      <FiChevronDown className="ml-1 w-4 h-4" />
-    </Link>
-  );
-}
-
-interface MobileNavItemProps {
-  href: string;
-  label: string;
-  onClick: () => void;
-}
-
-function MobileNavItem({ href, label, onClick }: MobileNavItemProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="py-1 border-b border-gray-100">
-      <div className="flex items-center justify-between">
-        <Link
-          href={href}
-          className="block py-3 text-base font-medium text-gray-900"
-          onClick={onClick}
-        >
-          {label}
-        </Link>
-        <button
-          type="button"
-          className="p-1 text-gray-500 rounded hover:bg-gray-100"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-expanded={isOpen}
-        >
-          <FiChevronDown
-            className={`w-5 h-5 transition-transform ${
-              isOpen ? "rotate-180" : ""
-            }`}
-          />
-        </button>
-      </div>
-      {isOpen && (
-        <div className="pl-4 pb-2">
-          <Link
-            href="#"
-            className="block py-2 text-sm text-gray-600 hover:text-green-500"
-            onClick={onClick}
-          >
-            Submenu Item 1
-          </Link>
-          <Link
-            href="#"
-            className="block py-2 text-sm text-gray-600 hover:text-green-500"
-            onClick={onClick}
-          >
-            Submenu Item 2
-          </Link>
-          <Link
-            href="#"
-            className="block py-2 text-sm text-gray-600 hover:text-green-500"
-            onClick={onClick}
-          >
-            Submenu Item 3
-          </Link>
-        </div>
-      )}
-    </div>
   );
 }

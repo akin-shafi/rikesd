@@ -1,74 +1,198 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaLinkedin, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import {
+  Linkedin,
+  Twitter,
+  Instagram,
+  Youtube,
+  ArrowRight,
+  Users,
+  Award,
+  Target,
+  Eye,
+  Heart,
+  MessageSquare,
+  Phone,
+} from "lucide-react";
 import EventTracker from "@/components/event-tracker";
 import EventCard from "@/components/event-card";
 import FaqAccordion from "@/components/faq-accordion";
-import Header from "@/components/header";
-import PartnerLogo from "@/components/partner-logo";
 import EcosystemSection from "@/components/ecosystem-section";
 import AchievementCard from "@/components/achievement-card";
 import ProgramCard from "@/components/program-card";
+import ProjectShowcase from "@/components/project-showcase";
+import TestimonialsSection from "@/components/testimonials-section";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import CounterAnimation from "@/components/counter-animation";
 
 export default function Home() {
-  return (
-    <div className="min-h-screen bg-white">
-      <Header />
+  const stats = [
+    { number: 150, label: "Research Projects", suffix: "+" },
+    { number: 50, label: "Partner Organizations", suffix: "+" },
+    { number: 25, label: "Countries Reached", suffix: "+" },
+    { number: 10000, label: "Lives Impacted", suffix: "+" },
+  ];
 
+  const features = [
+    {
+      icon: Target,
+      title: "Strategic Research",
+      description:
+        "Conducting cutting-edge research that addresses real-world challenges and drives sustainable development.",
+    },
+    {
+      icon: Users,
+      title: "Collaborative Networks",
+      description:
+        "Building partnerships with institutions, governments, and communities to amplify research impact.",
+    },
+    {
+      icon: Award,
+      title: "Innovation Excellence",
+      description:
+        "Fostering innovation through interdisciplinary approaches and emerging technology integration.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden bg-white">
-        <div className="absolute top-0 right-0 -z-10 w-full h-full">
-          <div className="absolute top-0 right-0 w-full h-full bg-[#f8f9fa] opacity-50">
-            <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=800')] bg-repeat opacity-5"></div>
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-lime-50/30 to-yellow-50/50"></div>
+        <div className="relative max-w-7xl mx-auto mt-10">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 display-text">
+              Advancing Research for{" "}
+              <span className="text-green-600">Sustainable Development</span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+              RIKESD is a leading research institute dedicated to generating
+              knowledge, fostering innovation, and building partnerships that
+              drive sustainable development across Africa and beyond.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
+              >
+                Explore Our Research
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-green-600 text-green-600 hover:bg-green-50 px-8 py-3 bg-transparent"
+              >
+                Join Our Network
+              </Button>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="container px-4 mx-auto">
-          <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
+      {/* Stats Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <Card
+                key={index}
+                className="text-center bg-white/80 backdrop-blur-sm border-green-100"
+              >
+                <CardContent className="p-6">
+                  <div className="text-3xl lg:text-4xl font-bold text-green-600 mb-2">
+                    <CounterAnimation end={stat.number} suffix={stat.suffix} />
+                  </div>
+                  <p className="text-gray-600 font-medium">{stat.label}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 display-text">
+              Our Core Focus Areas
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We drive impact through strategic research, collaborative
+              partnerships, and innovative solutions that address the most
+              pressing challenges of our time.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <Card
+                key={index}
+                className="group hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-green-100"
+              >
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors">
+                    <feature.icon className="h-8 w-8 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/60 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="mb-6 text-5xl font-bold leading-tight">
-                <span className="green-gradient-text">Empowering</span>{" "}
-                communities
-              </h1>
-              <h2 className="mb-8 text-4xl font-bold text-gray-900">
-                through Research, Innovation, and Enterprise
-              </h2>
-              <p className="mb-8 text-xl text-gray-600">
-                RIKESD is a Pan-African led organization that is leading the
-                transformation of communities through Research, Innovation,
-                Knowledge, Enterprise and Sustainable Development.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="#contact"
-                  className="px-6 py-3 text-white transition-colors bg-green-500 rounded-md hover:bg-green-600"
-                >
-                  Get Involved
-                </Link>
-                <Link
-                  href="#about"
-                  className="px-6 py-3 transition-colors border border-green-500 rounded-md green-gradient-text hover:bg-green-50"
-                >
-                  Learn More
-                </Link>
+              <div className="mb-12">
+                <div className="flex items-center mb-4">
+                  <Target className="h-8 w-8 text-green-600 mr-3" />
+                  <h2 className="text-3xl font-bold text-gray-900 display-text">
+                    Our Mission
+                  </h2>
+                </div>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  To advance knowledge and foster sustainable development
+                  through innovative research, strategic partnerships, and
+                  evidence-based solutions that address critical challenges
+                  facing communities across Africa and the global South.
+                </p>
+              </div>
+              <div>
+                <div className="flex items-center mb-4">
+                  <Eye className="h-8 w-8 text-green-600 mr-3" />
+                  <h2 className="text-3xl font-bold text-gray-900 display-text">
+                    Our Vision
+                  </h2>
+                </div>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  To be a leading research institute that transforms communities
+                  through knowledge creation, innovation, and sustainable
+                  development practices that create lasting positive impact.
+                </p>
               </div>
             </div>
-            <div className="relative h-[500px]">
-              <Image
-                src="/innovation.png?height=1000&width=1000"
-                alt="RIKESD team collaboration"
-                fill
-                className="object-cover rounded-lg"
-                priority
-              />
+            <div className="relative">
+              <div className="aspect-square bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center">
+                <Heart className="h-24 w-24 text-green-600" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Achievements Section */}
-      <section id="achievements" className="py-20 bg-gray-50">
-        <div className="container px-4 mx-auto">
+      <section id="achievements" className="py-20 bg-content-alt">
+        <div className="container px-4 mx-auto max-w-6xl">
           <div className="grid gap-12 md:grid-cols-2">
             <div>
               <h2 className="mb-6 text-4xl font-bold">
@@ -127,8 +251,8 @@ export default function Home() {
       </section>
 
       {/* Program Pathways Section */}
-      <section id="programs" className="py-20 bg-white">
-        <div className="container px-4 mx-auto">
+      <section id="programs" className="py-20 bg-content">
+        <div className="container px-4 mx-auto max-w-6xl">
           <div className="max-w-3xl mx-auto mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold">Our Research Pathways</h2>
             <p className="text-xl text-gray-600">
@@ -136,24 +260,23 @@ export default function Home() {
               innovation journey
             </p>
           </div>
-
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <ProgramCard
               title="RIKESD Core Program"
               description="It all starts with our renowned Core Program, which guides researchers at the idea and pre-development stages to reach the milestones needed for funding and sustained growth."
-              icon="/placeholder.svg?height=40&width=40"
+              icon="core-program"
               showArrow={true}
             />
             <ProgramCard
               title="Innovation Lab"
               description="After completing the Core Program, researchers get access to a series of additional resources and advisory programs to guide them towards their next major innovation milestones."
-              icon="/placeholder.svg?height=40&width=40"
+              icon="innovation-lab"
               showArrow={true}
             />
             <ProgramCard
               title="Enterprise Network"
               description="When ready, researchers get featured at events and connected to a diverse pool of investors and industry partners actively participating in funding and commercialization opportunities."
-              icon="/placeholder.svg?height=40&width=40"
+              icon="enterprise-network"
             />
           </div>
         </div>
@@ -162,9 +285,18 @@ export default function Home() {
       {/* Floating Event Tracker */}
       <EventTracker />
 
+      {/* Project Showcase Section */}
+      <ProjectShowcase />
+
+      {/* Ecosystem Section */}
+      <EcosystemSection />
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
       {/* Events Section */}
-      <section id="events" className="py-20 bg-white">
-        <div className="container px-4 mx-auto">
+      <section id="events" className="py-20 bg-content">
+        <div className="container px-4 mx-auto max-w-6xl">
           <div className="grid gap-12 md:grid-cols-2">
             <div>
               <h2 className="mb-6 text-4xl font-bold">
@@ -175,11 +307,13 @@ export default function Home() {
                 We exist to help researchers and innovators, so we run nearly
                 100 free events per year where you can meet local experts,
                 network with investors, learn from advisors, and connect with
-                collaborators.
+                collaborators. Our flagship S2B (School to Business) sessions
+                happen every first Saturday of the month, bridging the gap
+                between academic research and business applications.
               </p>
               <div className="relative h-[300px] rounded-xl overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=600&width=800"
+                  src="/placeholder.svg?height=300&width=400"
                   alt="RIKESD event"
                   fill
                   className="object-cover"
@@ -193,10 +327,21 @@ export default function Home() {
             </div>
             <div className="space-y-6">
               <EventCard
-                title="Scaling Research Through Partnerships in Nigeria"
-                date="Apr 17, 2025"
-                time="05:00pm +01"
+                title="S2B#43: AroFarmer Project BetaDay - Stakeholder Engagement"
+                date="Jul 5, 2025"
+                time="09:30am WAT"
                 featured={true}
+              />
+              <EventCard
+                title="S2B Monthly Session - School to Business"
+                date="First Saturday Monthly"
+                time="09:30am WAT"
+                featured={false}
+              />
+              <EventCard
+                title="Scaling Research Through Partnerships in Nigeria"
+                date="Jul 12, 2025"
+                time="05:00pm WAT"
               />
               <EventCard
                 title="RIKESD Online Information Session"
@@ -205,17 +350,12 @@ export default function Home() {
               />
               <EventCard
                 title="Researcher Networking: Find a Collaboration Partner"
-                date="Apr 17, 2025"
-                time="01:00pm +01"
-              />
-              <EventCard
-                title="RIKESD Alumni Panel: Meet Portfolio Projects and Ask Questions"
-                date="Apr 24, 2025"
-                time="01:00pm +01"
+                date="Jul 19, 2025"
+                time="01:00pm WAT"
               />
               <div className="pt-4">
                 <Link
-                  href="#more-events"
+                  href="/events"
                   className="flex items-center justify-center w-full gap-2 px-6 py-3 green-gradient-text transition-colors border border-green-500 rounded-md hover:bg-green-50"
                 >
                   <span>See more events</span>
@@ -240,45 +380,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Partnerships Section */}
-      <section id="partnerships" className="py-20 bg-gray-50">
-        <div className="container px-4 mx-auto">
-          <div className="max-w-3xl mx-auto mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold">Perks</h2>
-            <p className="text-xl text-gray-600">
-              Over $2M in discounts and freebies from AWS, Google, Microsoft,
-              IBM, and more.
-            </p>
-          </div>
-
-          <div className="relative">
-            <div className="flex items-center justify-center">
-              <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
-                <PartnerLogo name="AWS" />
-                <PartnerLogo name="Google Cloud" />
-                <PartnerLogo name="Microsoft" />
-                <PartnerLogo name="IBM" />
-                <PartnerLogo name="Oracle" />
-              </div>
-            </div>
-            <div className="mt-12 text-center">
-              <Link
-                href="#perks"
-                className="px-6 py-3 text-white transition-colors bg-green-500 rounded-md hover:bg-green-600"
-              >
-                See our perks package
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ecosystem Section - Replaced with new component */}
-      <EcosystemSection />
-
       {/* Benefits Section */}
-      <section id="benefits" className="py-20 bg-white">
-        <div className="container px-4 mx-auto">
+      <section id="benefits" className="py-20 bg-content">
+        <div className="container px-4 mx-auto max-w-6xl">
           <div className="max-w-3xl mx-auto mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold">Why Choose RIKESD</h2>
             <p className="text-xl text-gray-600">
@@ -286,7 +390,6 @@ export default function Home() {
               every stage of their journey.
             </p>
           </div>
-
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div className="p-6 transition-all bg-white border border-gray-200 rounded-xl hover:shadow-lg">
               <div className="flex items-center justify-center w-12 h-12 mb-4 bg-green-100 rounded-lg">
@@ -314,7 +417,6 @@ export default function Home() {
                 practices in your field.
               </p>
             </div>
-
             <div className="p-6 transition-all bg-white border border-gray-200 rounded-xl hover:shadow-lg">
               <div className="flex items-center justify-center w-12 h-12 mb-4 bg-green-100 rounded-lg">
                 <svg
@@ -342,7 +444,6 @@ export default function Home() {
                 interested in research-based innovations.
               </p>
             </div>
-
             <div className="p-6 transition-all bg-white border border-gray-200 rounded-xl hover:shadow-lg">
               <div className="flex items-center justify-center w-12 h-12 mb-4 bg-green-100 rounded-lg">
                 <svg
@@ -371,7 +472,6 @@ export default function Home() {
                 to collaborate and share insights.
               </p>
             </div>
-
             <div className="p-6 transition-all bg-white border border-gray-200 rounded-xl hover:shadow-lg">
               <div className="flex items-center justify-center w-12 h-12 mb-4 bg-green-100 rounded-lg">
                 <svg
@@ -402,8 +502,8 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-gray-50">
-        <div className="container px-4 mx-auto">
+      <section id="faq" className="py-20 bg-content-alt">
+        <div className="container px-4 mx-auto max-w-6xl">
           <div className="max-w-3xl mx-auto mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold">
               Frequently Asked{" "}
@@ -414,7 +514,6 @@ export default function Home() {
               opportunities.
             </p>
           </div>
-
           <div className="max-w-3xl mx-auto">
             <FaqAccordion
               questions={[
@@ -450,8 +549,8 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
-        <div className="container px-4 mx-auto">
+      <section id="contact" className="py-20 bg-content">
+        <div className="container px-4 mx-auto max-w-6xl">
           <div className="grid gap-12 md:grid-cols-2">
             <div>
               <h2 className="mb-6 text-4xl font-bold">
@@ -462,7 +561,6 @@ export default function Home() {
                 related to our programs, partnerships, or how you can get
                 involved.
               </p>
-
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-green-100 rounded-full">
@@ -491,7 +589,6 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-
                 <div className="flex items-start">
                   <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-green-100 rounded-full">
                     <svg
@@ -512,11 +609,10 @@ export default function Home() {
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900">Phone</h3>
                     <p className="mt-1 text-gray-600">
-                      +234 703 XXX XXXX, +234 708 XXX XXXX
+                      +2348066301780, +2347065174560
                     </p>
                   </div>
                 </div>
-
                 <div className="flex items-start">
                   <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-green-100 rounded-full">
                     <svg
@@ -537,145 +633,108 @@ export default function Home() {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900">Email</h3>
-                    <p className="mt-1 text-gray-600">info@rikesd.org</p>
+                    <p className="mt-1 text-gray-600">contact@rikesd.org</p>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-              <h3 className="mb-6 text-xl font-semibold text-gray-900">
-                I would like to discuss:
-              </h3>
-              <form>
-                <div className="grid gap-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
-                      Your Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
-                      Subject
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    >
-                      <option value="">Select a topic</option>
-                      <option value="Research Collaboration">
-                        Research Collaboration
-                      </option>
-                      <option value="Funding Opportunities">
-                        Funding Opportunities
-                      </option>
-                      <option value="Expert Community">Expert Community</option>
-                      <option value="Knowledge Marketplace">
-                        Knowledge Marketplace
-                      </option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block mb-2 text-sm font-medium text-gray-700"
-                    >
-                      Your Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      required
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="px-6 py-3 font-medium text-white transition-colors bg-green-500 rounded-md hover:bg-green-600"
+            <div className="flex flex-col items-center justify-center p-8 bg-content-alt rounded-xl">
+              <div className="text-center mb-8">
+                <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 bg-green-500 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-white"
                   >
-                    Submit
-                  </button>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
                 </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-12 bg-gray-50">
-        <div className="container px-4 mx-auto">
-          <div className="p-8 bg-green-500 rounded-2xl md:p-12">
-            <div className="grid gap-8 md:grid-cols-2">
-              <div>
-                <h2 className="mb-4 text-2xl font-bold text-white sm:text-3xl">
-                  Stay updated with our latest insights
-                </h2>
-                <p className="text-green-50">
-                  Subscribe to our newsletter to receive updates on research
-                  opportunities, events, and innovation trends.
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  Let's Chat!
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Get instant answers to your questions. Chat with our team on
+                  WhatsApp for quick support and information about our programs.
                 </p>
               </div>
-              <div className="flex items-center">
-                <form className="flex w-full max-w-md flex-col gap-2 md:flex-row">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-4 py-3 text-gray-900 bg-white border-0 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 w-full"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="px-6 py-3 font-medium text-white transition-colors bg-gray-800 rounded-md hover:bg-gray-900 w-full md:w-auto"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-              </div>
+              <a
+                href="https://wa.me/2348066301780?text=Hello%20RIKESD%20team!%20I%20would%20like%20to%20know%20more%20about%20your%20programs."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors shadow-lg hover:shadow-xl"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="mr-3"
+                >
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+                </svg>
+                Chat with us on WhatsApp
+              </a>
+              <p className="text-sm text-gray-500 mt-4 text-center">
+                Available Monday - Friday, 9:00 AM - 6:00 PM (WAT)
+              </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 to-green-700">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 display-text">
+            Ready to Make an Impact?
+          </h2>
+          <p className="text-xl text-green-100 mb-8 leading-relaxed">
+            Join our community of researchers, partners, and changemakers
+            working together to create a more sustainable and equitable future.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              className="bg-white text-green-600 hover:bg-gray-50 px-8 py-3"
+            >
+              <MessageSquare className="mr-2 h-5 w-5" />
+              Get Involved
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 bg-transparent"
+            >
+              <Phone className="mr-2 h-5 w-5" />
+              Contact Us
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* WhatsApp Float Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <Link
+          href="https://wa.me/2348066301780?text=Hello%20RIKESD%20team!%20I%20would%20like%20to%20know%20more%20about%20your%20programs."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+        >
+          <MessageSquare className="w-6 h-6 group-hover:scale-110 transition-transform" />
+        </Link>
+      </div>
+
       {/* Footer */}
-      <footer className="py-12 bg-white border-t border-gray-200">
-        <div className="container px-4 mx-auto">
+      <footer className="py-12 bg-content border-t border-gray-200">
+        <div className="container px-4 mx-auto max-w-6xl">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="flex items-center mb-6">
@@ -696,20 +755,19 @@ export default function Home() {
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-gray-900">
-                  <FaLinkedin className="w-5 h-5" />
+                  <Linkedin className="w-5 h-5" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-gray-900">
-                  <FaTwitter className="w-5 h-5" />
+                  <Twitter className="w-5 h-5" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-gray-900">
-                  <FaInstagram className="w-5 h-5" />
+                  <Instagram className="w-5 h-5" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-gray-900">
-                  <FaYoutube className="w-5 h-5" />
+                  <Youtube className="w-5 h-5" />
                 </a>
               </div>
             </div>
-
             <div>
               <h3 className="mb-6 text-lg font-medium text-gray-900">
                 About Us
@@ -757,7 +815,6 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-
             <div>
               <h3 className="mb-6 text-lg font-medium text-gray-900">
                 Support
@@ -805,7 +862,6 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-
             <div>
               <h3 className="mb-6 text-lg font-medium text-gray-900">
                 Innovation
@@ -854,7 +910,6 @@ export default function Home() {
               </ul>
             </div>
           </div>
-
           <div className="pt-8 mt-12 border-t border-gray-200">
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
               <p className="text-gray-600">
