@@ -62,7 +62,7 @@ export default function EventsPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-content border-b border-gray-200 pt-20">
+      <div className="bg-content border-b border-gray-200 ">
         <div className="container px-4 mx-auto max-w-6xl py-8">
           <div className="flex items-center gap-4 mb-6">
             <Link
