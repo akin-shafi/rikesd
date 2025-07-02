@@ -5,7 +5,11 @@ import Image from "next/image";
 import { Linkedin, Twitter, ExternalLink } from "lucide-react";
 
 interface TeamMember {
+<<<<<<< HEAD
   id: string; 
+=======
+  id: string;
+>>>>>>> fadaf78 (initial commit to new branch)
   name: string;
   designation: string;
   image: string;
