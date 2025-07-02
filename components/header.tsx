@@ -1,243 +1,164 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const router = useRouter();
+  const pathname = usePathname();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
+  const scrollToSection = (sectionId: string) => {
+    if (pathname !== "/") {
+      // If not on home page, navigate to home first
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMenuOpen(false);
+  };
 
-  // Prevent body scroll when mobile menu is open
+  const handleNavigation = (href: string, sectionId?: string) => {
+    if (sectionId) {
+      scrollToSection(sectionId);
+    } else {
+      setIsMenuOpen(false);
+    }
+  };
+
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "unset";
     }
+
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "unset";
     };
   }, [isMenuOpen]);
 
-  const handleNavigation = (sectionId: string) => {
-    setIsMenuOpen(false);
-
-    if (window.location.pathname !== "/") {
-      router.push(`/#${sectionId}`);
-    } else {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-sm" : "bg-transparent"
-      }`}
-    >
-      <div className="container px-6 mx-auto">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/logo-dark.png?height=150&width=150"
-                alt="RIKESD Logo"
-                width={150}
-                height={150}
-                className="mr-2"
-              />
-            </Link>
-          </div>
+    <header className="sticky top-0 z-40 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <div className="container flex h-16 items-center justify-between px-4 mx-auto max-w-7xl">
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo-dark.png?height=150&width=150"
+            alt="RIKESD Logo"
+            width={150}
+            height={150}
+            className="mr-2"
+          />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex lg:items-center lg:space-x-1">
-            <button
-              onClick={() => handleNavigation("programs")}
-              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
-                isScrolled
-                  ? "text-gray-700 hover:text-gray-900"
-                  : "text-gray-900 hover:text-gray-900"
-              }`}
-            >
-              Programs
-            </button>
-            <button
-              onClick={() => handleNavigation("projects")}
-              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
-                isScrolled
-                  ? "text-gray-700 hover:text-gray-900"
-                  : "text-gray-900 hover:text-gray-900"
-              }`}
-            >
-              Projects
-            </button>
-            <Link
-              href="/events"
-              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
-                isScrolled
-                  ? "text-gray-700 hover:text-gray-900"
-                  : "text-gray-900 hover:text-gray-900"
-              }`}
-            >
-              Events
-            </Link>
-            <Link
-              href="/teams"
-              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
-                isScrolled
-                  ? "text-gray-700 hover:text-gray-900"
-                  : "text-gray-900 hover:text-gray-900"
-              }`}
-            >
-              Teams
-            </Link>
-            <Link
-              href="/partners"
-              className={`px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors ${
-                isScrolled
-                  ? "text-gray-700 hover:text-gray-900"
-                  : "text-gray-900 hover:text-gray-900"
-              }`}
-            >
-              Partners
-            </Link>
-          </nav>
-
-          {/* CTA Buttons */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-6">
-            <button
-              onClick={() => handleNavigation("apply")}
-              className="px-4 py-2 text-sm font-medium text-white transition-colors bg-green-500 rounded-lg hover:bg-green-600"
-            >
-              Apply Now
-            </button>
-            <button
-              onClick={() => handleNavigation("contact")}
-              className="px-4 py-2 text-sm font-medium transition-colors border border-green-500 rounded-lg text-green-500 hover:bg-green-50"
-            >
-              Get Started
-            </button>
-          </div>
-
-          {/* Tablet/Mobile Menu Button */}
-          <div className="flex lg:hidden">
-            <button
-              type="button"
-              className={`inline-flex items-center justify-center p-2 rounded-md ${
-                isScrolled
-                  ? "text-gray-700 hover:text-gray-900"
-                  : "text-gray-900 hover:text-gray-900"
-              }`}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-expanded={isMenuOpen}
-              aria-label="Toggle navigation menu"
-            >
-              <span className="sr-only">Open main menu</span>
-              <Menu className="w-6 h-6" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
-          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-        aria-hidden="true"
-      ></div>
-
-      {/* Mobile Menu Slide-in Panel */}
-      <div
-        className={`fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-white z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-xl font-medium text-gray-900">Menu</h2>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
           <button
-            type="button"
-            className="p-2 text-gray-500 rounded-md hover:text-gray-900 hover:bg-gray-100"
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Close menu"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-
-        <nav className="px-4 py-2">
-          <button
-            onClick={() => handleNavigation("programs")}
-            className="block w-full py-3 text-left text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
+            onClick={() => scrollToSection("programs")}
+            className="text-gray-600 hover:text-green-600 transition-colors font-medium"
           >
             Programs
           </button>
           <button
-            onClick={() => handleNavigation("projects")}
-            className="block w-full py-3 text-left text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
+            onClick={() => scrollToSection("projects")}
+            className="text-gray-600 hover:text-green-600 transition-colors font-medium"
           >
             Projects
           </button>
           <Link
             href="/events"
-            className="block py-3 text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
-            onClick={() => setIsMenuOpen(false)}
+            className="text-gray-600 hover:text-green-600 transition-colors font-medium"
           >
             Events
           </Link>
           <Link
             href="/teams"
-            className="block py-3 text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
-            onClick={() => setIsMenuOpen(false)}
+            className="text-gray-600 hover:text-green-600 transition-colors font-medium"
           >
-            Teams
+            Team
           </Link>
           <Link
             href="/partners"
-            className="block py-3 text-base font-medium text-gray-900 hover:text-green-500 transition-colors border-b border-gray-100"
-            onClick={() => setIsMenuOpen(false)}
+            className="text-gray-600 hover:text-green-600 transition-colors font-medium"
           >
             Partners
           </Link>
-
-          <div className="pt-4 mt-4 border-t border-gray-200">
-            <button
-              onClick={() => handleNavigation("apply")}
-              className="block w-full px-4 py-2 mb-3 text-sm font-medium text-center text-white bg-green-500 rounded-md hover:bg-green-600"
-            >
-              Apply Now
-            </button>
-            <button
-              onClick={() => handleNavigation("contact")}
-              className="block w-full px-4 py-2 text-sm font-medium text-center border border-green-500 rounded-md text-green-500 hover:bg-green-50"
-            >
-              Get Started
-            </button>
-          </div>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="text-gray-600 hover:text-green-600 transition-colors font-medium"
+          >
+            Contact
+          </button>
         </nav>
+
+        {/* Mobile Menu Button */}
+        <Button
+          variant="ghost"
+          size="sm"
+          className="md:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
+        </Button>
       </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 top-16 z-50 bg-white md:hidden">
+          <nav className="flex flex-col space-y-4 p-6">
+            <button
+              onClick={() => handleNavigation("/", "programs")}
+              className="text-left text-lg font-medium text-gray-600 hover:text-green-600 transition-colors py-2"
+            >
+              Programs
+            </button>
+            <button
+              onClick={() => handleNavigation("/", "projects")}
+              className="text-left text-lg font-medium text-gray-600 hover:text-green-600 transition-colors py-2"
+            >
+              Projects
+            </button>
+            <Link
+              href="/events"
+              onClick={() => handleNavigation("/events")}
+              className="text-lg font-medium text-gray-600 hover:text-green-600 transition-colors py-2"
+            >
+              Events
+            </Link>
+            <Link
+              href="/teams"
+              onClick={() => handleNavigation("/teams")}
+              className="text-lg font-medium text-gray-600 hover:text-green-600 transition-colors py-2"
+            >
+              Team
+            </Link>
+            <Link
+              href="/partners"
+              onClick={() => handleNavigation("/partners")}
+              className="text-lg font-medium text-gray-600 hover:text-green-600 transition-colors py-2"
+            >
+              Partners
+            </Link>
+            <button
+              onClick={() => handleNavigation("/", "contact")}
+              className="text-left text-lg font-medium text-gray-600 hover:text-green-600 transition-colors py-2"
+            >
+              Contact
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
