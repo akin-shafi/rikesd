@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Users, Award, Target, Eye, Heart } from "lucide-react";
-import EventTracker from "@/components/event-tracker";
+// import EventTracker from "@/components/event-tracker";
 import EventCard from "@/components/event-card";
 import FaqAccordion from "@/components/faq-accordion";
 import EcosystemSection from "@/components/ecosystem-section";
@@ -249,7 +249,7 @@ export default function Home() {
       </section>
 
       {/* Floating Event Tracker */}
-      <EventTracker />
+      {/* <EventTracker /> */}
 
       {/* Project Showcase Section */}
       <ProjectShowcase />
