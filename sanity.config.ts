@@ -10,6 +10,8 @@ export default defineConfig({
   projectId: "lwbnn2sj",
   dataset: "production",
 
+  
+
   plugins: [structureTool(), visionTool()],
 
   schema: {
