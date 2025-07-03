@@ -1,4 +1,6 @@
-"use client"
+
+// teamMembers.tsx
+"use client";
 
 import { useState, useEffect } from "react"
 
@@ -714,5 +716,5 @@ export function useTeamMembers() {
     error,
     getTeamMembersByCategory,
     getTeamMemberById,
-  }
+  };
 }
