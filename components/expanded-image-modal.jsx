@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { FiX } from "react-icons/fi";
+import { X } from "lucide-react";
 
 const ExpandedImageModal = ({ src, alt, onClose }) => {
   // Click-outside handler using useEffect
@@ -43,7 +43,7 @@ const ExpandedImageModal = ({ src, alt, onClose }) => {
           className="absolute top-2 right-2 p-2 rounded-full bg-gray-900 hover:bg-gray-700 transition-colors z-70"
           aria-label="Close expanded image"
         >
-          <FiX className="w-6 h-6 text-white" />
+          <X className="w-6 h-6 text-white" />
         </button>
         <div className="relative w-full h-[80vh]">
           <Image src={src} alt={alt} fill className="object-contain" />

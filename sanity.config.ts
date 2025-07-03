@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'default',
   title: 'RikeSD',
 
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID as string,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET as string,
+  projectId: "lwbnn2sj",
+  dataset: "production",
 
   plugins: [structureTool(), visionTool()],
 
