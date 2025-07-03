@@ -9,15 +9,13 @@ export async function getTeamMembers() {
     bio,
     expertise,
     achievements,
-    linkedin,
+    linkedin-contractors
     twitter,
     category
   }`;
   const teamMembers = await sanityClient.fetch(query);
   return teamMembers;
 }
-
-
 
 export async function getEvents() {
   const query = `*[_type == "event"]{
@@ -103,4 +101,25 @@ export async function getPartners() {
   }`;
   const partners = await sanityClient.fetch(query);
   return partners;
+}
+
+export async function getMetrics() {
+  const query = `*[_type == "metric"]{
+    _id,
+    label,
+    value,
+    prefix,
+    suffix,
+    description,
+    category,
+    lastUpdated,
+    trend{
+      direction,
+      percentage,
+      period
+    },
+    metricType
+  }`;
+  const metrics = await sanityClient.fetch(query);
+  return metrics;
 }
