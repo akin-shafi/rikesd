@@ -217,7 +217,7 @@ export default function PartnersPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-content border-b border-gray-200 pt-28">
+      <div className="bg-content border-b border-gray-200 ">
         <div className="container px-6 mx-auto max-w-7xl py-8">
           <div className="flex items-center gap-4 mb-6">
             <Link

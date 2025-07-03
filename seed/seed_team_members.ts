@@ -3,11 +3,6 @@ import { createClient } from '@sanity/client';
 import { v4 as uuidv4 } from 'uuid'; // Optional for generating unique _id
 
 const client = createClient({
-  // projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  // dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  // apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
-  // token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN,
-
   projectId: "lwbnn2sj",
   dataset: "production",
   apiVersion: "2025-07-02",
