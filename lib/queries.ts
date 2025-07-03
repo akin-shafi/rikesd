@@ -9,7 +9,7 @@ export async function getTeamMembers() {
     bio,
     expertise,
     achievements,
-    linkedin-contractors
+    linkedin,
     twitter,
     category
   }`;
@@ -122,4 +122,45 @@ export async function getMetrics() {
   }`;
   const metrics = await sanityClient.fetch(query);
   return metrics;
+}
+
+export async function getFeaturedEvent() {
+  const query = `*[_type == "event" && featured == true][0]{
+    _id,
+    title,
+    subtitle,
+    date,
+    time,
+    duration,
+    platform,
+    type,
+    featured,
+    category,
+    description,
+    agenda,
+    speakers[]{
+      id,
+      name,
+      title,
+      organization,
+      bio,
+      image,
+      linkedIn,
+      twitter,
+      expertise
+    },
+    registrationUrl,
+    tags,
+    flyer,
+    discussion{
+      topic,
+      summary,
+      keyPoints,
+      videoUrl
+    },
+    attendees,
+    recording
+  }`;
+  const event = await sanityClient.fetch(query);
+  return event;
 }
