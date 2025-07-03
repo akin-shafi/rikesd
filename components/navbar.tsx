@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { FiMenu, FiX } from "react-icons/fi"
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
@@ -21,19 +21,34 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex md:items-center md:space-x-8">
-            <Link href="/" className="text-sm font-medium text-gray-900 hover:text-emerald-600">
+            <Link
+              href="/"
+              className="text-sm font-medium text-gray-900 hover:text-emerald-600"
+            >
               Home
             </Link>
-            <Link href="#about" className="text-sm font-medium text-gray-600 hover:text-emerald-600">
+            <Link
+              href="#about"
+              className="text-sm font-medium text-gray-600 hover:text-emerald-600"
+            >
               About Us
             </Link>
-            <Link href="#" className="text-sm font-medium text-gray-600 hover:text-emerald-600">
+            <Link
+              href="#"
+              className="text-sm font-medium text-gray-600 hover:text-emerald-600"
+            >
               Global Leaders
             </Link>
-            <Link href="#" className="text-sm font-medium text-gray-600 hover:text-emerald-600">
+            <Link
+              href="#"
+              className="text-sm font-medium text-gray-600 hover:text-emerald-600"
+            >
               Opportunities
             </Link>
-            <Link href="#contact" className="text-sm font-medium text-gray-600 hover:text-emerald-600">
+            <Link
+              href="#contact"
+              className="text-sm font-medium text-gray-600 hover:text-emerald-600"
+            >
               Contact
             </Link>
           </nav>
@@ -56,7 +71,11 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <span className="sr-only">Open main menu</span>
-              {isMenuOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
@@ -112,5 +131,5 @@ export default function Navbar() {
         </div>
       )}
     </header>
-  )
+  );
 }
