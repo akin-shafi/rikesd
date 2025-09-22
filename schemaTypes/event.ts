@@ -152,7 +152,10 @@ export default defineType({
     defineField({
       name: 'flyer',
       title: 'Flyer',
-      type: 'string',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: 'discussion',
