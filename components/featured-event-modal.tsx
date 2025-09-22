@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useFeaturedEvent } from "@/hooks/useFeaturedEvent";
 import SpeakerCard from "@/components/speaker-card";
+import { urlFor } from "@/lib/sanityImageBuilder";
 
 interface FeaturedEventModalProps {
   isOpen: boolean;
@@ -107,7 +108,7 @@ export default function FeaturedEventModal({
           {featuredEvent.flyer && (
             <div className="relative h-64 md:h-80 bg-gradient-to-br from-green-100 to-green-200">
               <Image
-                src={featuredEvent.flyer || "/placeholder.svg"}
+                src={urlFor(featuredEvent.flyer).url() || "/placeholder.svg"}
                 alt={`${featuredEvent.title} flyer`}
                 fill
                 className="object-cover"
