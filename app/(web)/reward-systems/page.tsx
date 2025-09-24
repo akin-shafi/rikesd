@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { Tab, Disclosure } from "@headlessui/react";
 import { rewardSystemData } from "../data/rewardSystemData";
