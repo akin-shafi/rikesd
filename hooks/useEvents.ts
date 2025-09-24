@@ -22,6 +22,14 @@ export interface EventDiscussion {
   videoUrl?: string;
 }
 
+export interface SanityImage {
+  _type: "image";
+  asset: {
+    _id: string;
+    url: string;
+  };
+}
+
 export interface Event {
   id: string;
   title: string;
@@ -38,7 +46,7 @@ export interface Event {
   speakers: Speaker[];
   registrationUrl?: string;
   tags: string[];
-  flyer?: string;
+  flyer?: SanityImage;
   discussion?: EventDiscussion;
   attendees?: number;
   recording?: string;

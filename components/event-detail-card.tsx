@@ -9,6 +9,7 @@ import {
   Play,
 } from "lucide-react";
 import type { Event } from "@/hooks/useEvents";
+import { urlFor } from "@/lib/sanityImageBuilder";
 
 interface EventDetailCardProps {
   event: Event;
@@ -29,7 +30,7 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
       {event.flyer && (
         <div className="relative h-64 md:h-80 lg:h-96 bg-gray-100">
           <Image
-            src={event.flyer || "/placeholder.svg"}
+            src={urlFor(event.flyer).width(600).url() || "/placeholder.svg"}
             alt={`${event.title} flyer`}
             fill
             className="object-cover md:object-contain lg:object-contain"

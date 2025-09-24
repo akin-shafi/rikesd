@@ -89,7 +89,7 @@ const mockEvents = [
     ],
     registrationUrl: "https://zoom.us/webinar/register/s2b43",
     tags: ["S2B", "BetaDay", "AfrikaRIDE2.0", "AroFarmer", "Stakeholder Engagement"],
-    flyer: "/s2b-event-flyer.jpg",
+    flyer: "",
   },
   {
     id: "s2b-42",

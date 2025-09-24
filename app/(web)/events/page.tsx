@@ -201,7 +201,7 @@ export default function EventsPage() {
                         videoUrl={event.recording}
                         discussion={
                           event.type === "past"
-                            ? `Shared insights on ${speaker.expertise[0]}`
+                            ? `Shared insights on`
                             : undefined
                         }
                       />
