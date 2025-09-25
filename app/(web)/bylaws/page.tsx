@@ -1,10 +1,10 @@
-import RewardSystemPage from "@/components/reward-system-page";
+import BylawsPage from "@/components/bylaws-page";
 import MainLayout from "@/components/main-layout";
 
 export default function Page() {
   return (
     <MainLayout>
-      <RewardSystemPage />
+      <BylawsPage />
     </MainLayout>
   );
 }

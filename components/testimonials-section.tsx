@@ -28,7 +28,7 @@ export default function TestimonialsSection() {
       role: "Environmental Scientist",
       image: "/placeholder.svg?height=100&width=100",
       quote:
-        "Patch Africa's initiatives align perfectly with our sustainability goals. The Campus Free Waste program has been transformational.",
+        "Pach Africa's initiatives align perfectly with our sustainability goals. The Campus Free Waste program has been transformational.",
     },
   ];
 

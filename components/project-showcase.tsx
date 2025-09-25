@@ -62,7 +62,7 @@ function ProjectCard({
             ))}
           </ul>
         </div>
-        {/* {link && (
+        {link && (
           <Link
             href={link}
             className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 border border-green-600 rounded-md hover:bg-green-50 transition-colors"
@@ -82,7 +82,7 @@ function ProjectCard({
               />
             </svg>
           </Link>
-        )} */}
+        )}
       </div>
     </div>
   );
@@ -116,7 +116,7 @@ export default function ProjectShowcase() {
         "Marketplace access",
       ],
       image: "/placeholder.svg?height=200&width=400",
-      link: "#keia",
+      link: "https://startup-accelerator-five.vercel.app",
     },
     {
       title: "Rike Marketplace",
@@ -144,10 +144,10 @@ export default function ProjectShowcase() {
         "Community-driven farming",
       ],
       image: "/placeholder.svg?height=200&width=400",
-      link: "#arofarmer",
+      link: "https://arofarmer.vercel.app",
     },
     {
-      title: "Patch Africa",
+      title: "Pach Africa",
       category: "Environment",
       description:
         "Pan-African Circular Hotspot promoting carbon emission reduction and access to carbon credits through green initiatives.",

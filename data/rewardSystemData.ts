@@ -29,7 +29,7 @@ export const rewardSystemData = {
         description: "A tech-driven urban agriculture platform.",
       },
       {
-        name: "Patch Africa",
+        name: "Pach Africa",
         description:
           "A Pan-African Circular Hotspot for carbon emission reduction.",
       },
@@ -122,7 +122,7 @@ export const rewardSystemData = {
     board: {
       honorariums: "500,000–1,000,000 NGN annually for key contributions.",
       milestone:
-        "Securing partnerships (e.g., university collaborations for Patch Africa), obtaining grants >5 million NGN, or facilitating investor connections for KEIA.",
+        "Securing partnerships (e.g., university collaborations for Pach Africa), obtaining grants >5 million NGN, or facilitating investor connections for KEIA.",
       recognition: "Inclusion in annual reports and events.",
     },
     emt: {
