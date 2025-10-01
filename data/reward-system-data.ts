@@ -3,7 +3,8 @@ export const rewardSystemData = {
     policyTitle: "RikeSD Reward System Policy",
     version: "2.0",
     effectiveDate: "January 1, 2026",
-    approvedBy: "[To be determined upon final approval – e.g., Board of Directors and EMT]",
+    approvedBy:
+      "[To be determined upon final approval – e.g., Board of Directors and EMT]",
     reviewFrequency: "Annually",
     contact: "Reward Committee, RikeSD (info@rikesd.org)",
   },
@@ -29,7 +30,8 @@ export const rewardSystemData = {
       },
       {
         name: "Patch Africa",
-        description: "A Pan-African Circular Hotspot for carbon emission reduction.",
+        description:
+          "A Pan-African Circular Hotspot for carbon emission reduction.",
       },
     ],
   },
@@ -51,20 +53,25 @@ export const rewardSystemData = {
     framework:
       "Board members receive compensation for their strategic oversight, meeting attendance, and contributions to RikeSD's mission. All compensation is structured to comply with NGO regulations and Limited by Guarantee company requirements.",
     sittingAllowances: {
-      regularMeetings: "50,000 NGN per Board meeting attended (minimum 4 meetings annually).",
+      regularMeetings:
+        "50,000 NGN per Board meeting attended (minimum 4 meetings annually).",
       specialMeetings: "75,000 NGN per special or emergency Board meeting.",
-      committeeWork: "30,000 NGN per committee meeting (Audit, Finance, Governance, etc.).",
+      committeeWork:
+        "30,000 NGN per committee meeting (Audit, Finance, Governance, etc.).",
     },
     boardFees: {
-      annualRetainer: "500,000–1,000,000 NGN annually based on role and responsibilities.",
+      annualRetainer:
+        "500,000–1,000,000 NGN annually based on role and responsibilities.",
       chairperson: "1,500,000 NGN annually for Board Chairperson.",
       viceChairperson: "1,000,000 NGN annually for Vice Chairperson.",
-      treasurer: "1,200,000 NGN annually for Treasurer (additional financial oversight responsibilities).",
+      treasurer:
+        "1,200,000 NGN annually for Treasurer (additional financial oversight responsibilities).",
       secretary: "1,000,000 NGN annually for Board Secretary.",
       members: "500,000–750,000 NGN annually for general Board members.",
     },
     performanceBonus: {
-      amount: "Up to 500,000 NGN annually for exceptional strategic contributions.",
+      amount:
+        "Up to 500,000 NGN annually for exceptional strategic contributions.",
       criteria: [
         "Securing major partnerships (e.g., university collaborations for Patch Africa)",
         "Obtaining grants exceeding 10 million NGN",
@@ -81,41 +88,103 @@ export const rewardSystemData = {
     framework:
       "EMT members receive competitive compensation through project milestone achievements, performance-based bonuses, and professional development opportunities. This structure recognizes operational excellence and project delivery success.",
     projectMilestoneCompensation: {
-      structure: "Milestone-based payments tied to specific, measurable project achievements.",
-      paymentRange: "250,000–2,000,000 NGN per major milestone depending on project complexity and impact.",
+      structure:
+        "Milestone-based payments tied to specific, measurable project achievements.",
+      paymentRange:
+        "250,000–2,000,000 NGN per major milestone depending on project complexity and impact.",
       projectChampionBonus:
         "Additional 500,000–1,500,000 NGN for EMT members leading specific projects to successful completion.",
     },
     milestonesByProject: {
       skillnovate: [
-        { milestone: "Launching certification programs", compensation: "500,000 NGN" },
-        { milestone: "Achieving 10,000 active users", compensation: "1,000,000 NGN" },
-        { milestone: "80% completion rate in training sessions", compensation: "750,000 NGN" },
-        { milestone: "Securing institutional partnerships (5+ universities)", compensation: "1,500,000 NGN" },
+        {
+          milestone: "Launching certification programs",
+          compensation: "500,000 NGN",
+        },
+        {
+          milestone: "Achieving 10,000 active users",
+          compensation: "1,000,000 NGN",
+        },
+        {
+          milestone: "80% completion rate in training sessions",
+          compensation: "750,000 NGN",
+        },
+        {
+          milestone: "Securing institutional partnerships (5+ universities)",
+          compensation: "1,500,000 NGN",
+        },
       ],
       keia: [
-        { milestone: "Incubating 5 startups successfully", compensation: "1,000,000 NGN" },
-        { milestone: "Securing investor funding (>2 million NGN per startup)", compensation: "1,500,000 NGN" },
-        { milestone: "Marketplace access for 10 products", compensation: "750,000 NGN" },
-        { milestone: "Generating 5 million NGN in startup revenue", compensation: "2,000,000 NGN" },
+        {
+          milestone: "Incubating 5 startups successfully",
+          compensation: "1,000,000 NGN",
+        },
+        {
+          milestone: "Securing investor funding (>2 million NGN per startup)",
+          compensation: "1,500,000 NGN",
+        },
+        {
+          milestone: "Marketplace access for 10 products",
+          compensation: "750,000 NGN",
+        },
+        {
+          milestone: "Generating 5 million NGN in startup revenue",
+          compensation: "2,000,000 NGN",
+        },
       ],
       rikeMarketplace: [
-        { milestone: "Onboarding 100 research outputs", compensation: "500,000 NGN" },
-        { milestone: "Generating 1 million NGN in sales", compensation: "1,000,000 NGN" },
-        { milestone: "Integrating with AroFarmer Initiative", compensation: "750,000 NGN" },
-        { milestone: "Establishing 20+ active vendor partnerships", compensation: "1,200,000 NGN" },
+        {
+          milestone: "Onboarding 100 research outputs",
+          compensation: "500,000 NGN",
+        },
+        {
+          milestone: "Generating 1 million NGN in sales",
+          compensation: "1,000,000 NGN",
+        },
+        {
+          milestone: "Integrating with AroFarmer Initiative",
+          compensation: "750,000 NGN",
+        },
+        {
+          milestone: "Establishing 20+ active vendor partnerships",
+          compensation: "1,200,000 NGN",
+        },
       ],
       arofarmer: [
-        { milestone: "Matching 50 landowners with growers", compensation: "750,000 NGN" },
-        { milestone: "Transforming 50 urban spaces", compensation: "1,000,000 NGN" },
-        { milestone: "Generating 500,000 NGN in community income", compensation: "500,000 NGN" },
-        { milestone: "Establishing 10 sustainable urban farms", compensation: "1,500,000 NGN" },
+        {
+          milestone: "Matching 50 landowners with growers",
+          compensation: "750,000 NGN",
+        },
+        {
+          milestone: "Transforming 50 urban spaces",
+          compensation: "1,000,000 NGN",
+        },
+        {
+          milestone: "Generating 500,000 NGN in community income",
+          compensation: "500,000 NGN",
+        },
+        {
+          milestone: "Establishing 10 sustainable urban farms",
+          compensation: "1,500,000 NGN",
+        },
       ],
       patchAfrica: [
-        { milestone: "Implementing Waste for Meal Program in 5 communities", compensation: "1,000,000 NGN" },
-        { milestone: "Securing carbon credits for 10 universities", compensation: "1,500,000 NGN" },
-        { milestone: "Reducing emissions by 20% in pilot areas", compensation: "1,200,000 NGN" },
-        { milestone: "Establishing Pan-African partnerships (5+ countries)", compensation: "2,000,000 NGN" },
+        {
+          milestone: "Implementing Waste for Meal Program in 5 communities",
+          compensation: "1,000,000 NGN",
+        },
+        {
+          milestone: "Securing carbon credits for 10 universities",
+          compensation: "1,500,000 NGN",
+        },
+        {
+          milestone: "Reducing emissions by 20% in pilot areas",
+          compensation: "1,200,000 NGN",
+        },
+        {
+          milestone: "Establishing Pan-African partnerships (5+ countries)",
+          compensation: "2,000,000 NGN",
+        },
       ],
     },
     performanceBonuses: {
@@ -130,14 +199,17 @@ export const rewardSystemData = {
       quarterly: "100,000–500,000 NGN for outstanding quarterly performance.",
     },
     professionalDevelopment: {
-      training: "Access to Skillnovate courses or external certifications (value up to 500,000 NGN annually).",
-      conferences: "Sponsorship for relevant industry conferences and workshops (up to 300,000 NGN annually).",
+      training:
+        "Access to Skillnovate courses or external certifications (value up to 500,000 NGN annually).",
+      conferences:
+        "Sponsorship for relevant industry conferences and workshops (up to 300,000 NGN annually).",
       mentorship: "Participation in leadership development programs.",
     },
     recognition: {
       awards: '"Project Champion" awards at RikeSD annual events.',
       certificates: "Achievement certificates for milestone completions.",
-      publicity: "Feature in organizational communications and success stories.",
+      publicity:
+        "Feature in organizational communications and success stories.",
     },
     disbursement:
       "Milestone compensation paid within 30 days of verified achievement; quarterly bonuses paid at end of each quarter; annual bonuses paid after annual review.",
@@ -146,14 +218,18 @@ export const rewardSystemData = {
     framework:
       "For EMT members who also provide vendor services (e.g., software development, consulting), compensation is structured through direct payment and potential performance-based bonuses.",
     paymentStructure: {
-      standard: "100% cash payment for services rendered at agreed contract rates.",
-      milestonePayments: "Payments tied to project milestones and deliverables.",
+      standard:
+        "100% cash payment for services rendered at agreed contract rates.",
+      milestonePayments:
+        "Payments tied to project milestones and deliverables.",
       example:
         "For a 19.2 million NGN project: Full payment in installments based on milestone completion (e.g., 30% upfront, 40% at mid-point, 30% at completion).",
     },
     performanceIncentives: {
-      earlyCompletion: "Up to 10% bonus for projects completed ahead of schedule without quality compromise.",
-      qualityExcellence: "Up to 15% bonus for exceptional quality exceeding specifications.",
+      earlyCompletion:
+        "Up to 10% bonus for projects completed ahead of schedule without quality compromise.",
+      qualityExcellence:
+        "Up to 15% bonus for exceptional quality exceeding specifications.",
       innovationBonus:
         "Additional compensation for innovative solutions that add significant value (negotiated per project).",
     },
@@ -169,12 +245,14 @@ export const rewardSystemData = {
     },
   },
   review: {
-    committee: "Composed of 2 Board members, 2 EMT representatives, and 1 neutral advisor. Meets quarterly.",
+    committee:
+      "Composed of 2 Board members, 2 EMT representatives, and 1 neutral advisor. Meets quarterly.",
     annual:
       "Comprehensive assessment in Q4, including: Evaluation of contributions via self-assessments, peer reviews, and KPI data. Adjustments to compensation amounts, bonus criteria, or milestone definitions based on organizational performance and feedback.",
     quarterly:
       "Review of milestone achievements, performance metrics, and compensation disbursements. Open sessions for stakeholders to suggest improvements.",
-    dispute: "Appeals handled by the Committee; final decisions by the Board. All disputes resolved within 30 days.",
+    dispute:
+      "Appeals handled by the Committee; final decisions by the Board. All disputes resolved within 30 days.",
     documentation:
       "All reviews recorded and shared transparently with stakeholders. Annual compensation reports published internally.",
   },
@@ -217,4 +295,4 @@ export const rewardSystemData = {
     ],
   },
   signed: "Signed: EMT Member & BOD Date: January 1, 2026",
-}
+};
