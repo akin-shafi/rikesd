@@ -49,7 +49,7 @@ export default function RewardSystemPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email === "operations@rikesd.org" && password === "confidential") {
+    if (email === "operations@rikesd.org" && password === "classified") {
       setAuthenticated(true);
       setError("");
     } else {
@@ -913,8 +913,6 @@ export default function RewardSystemPage() {
 
   return (
     <div>
-    
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Desktop Sidebar Navigation - Fixed height with scroll */}
