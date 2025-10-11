@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import type { Event } from "@/hooks/useEvents";
 import { urlFor } from "@/lib/sanityImageBuilder";
+import { PortableText } from "@portabletext/react";
 
 interface EventDetailCardProps {
   event: Event;
@@ -101,25 +102,37 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
           )}
         </div>
 
-        <p className="text-gray-600 mb-6">{event.description}</p>
+        <div className="prose prose-green max-w-none text-gray-600 mb-6">
+          <PortableText value={typeof event.description === "string"
+            ? [
+                {
+                  _type: "block",
+                  children: [{ _type: "span", text: event.description }],
+                  markDefs: [],
+                  style: "normal",
+                },
+              ]
+            : event.description}
+          />
+        </div>
 
         {Array.isArray(event.agenda) && event.agenda.length > 0 && (
-  <div className="mb-6">
-    <h3 className="text-lg font-semibold text-gray-900 mb-3">
-      Event Agenda
-    </h3>
-    <ul className="space-y-2">
-      {event.agenda.map((item, index) => (
-        <li key={index} className="flex items-start">
-          <span className="flex-shrink-0 w-6 h-6 bg-green-100 text-green-800 rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-0.5">
-            {index + 1}
-          </span>
-          <span className="text-gray-700">{item}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              Event Agenda
+            </h3>
+            <ul className="space-y-2">
+              {event.agenda.map((item, index) => (
+                <li key={index} className="flex items-start">
+                  <span className="flex-shrink-0 w-6 h-6 bg-green-100 text-green-800 rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-0.5">
+                    {index + 1}
+                  </span>
+                  <span className="text-gray-700">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Tags</h3>
