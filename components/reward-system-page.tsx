@@ -13,9 +13,9 @@ import {
   CogIcon,
   CheckCircleIcon,
   BookOpenIcon,
-  GlobeAltIcon,
+  GlobeAltIcon, // Import GlobeAltIcon
 } from "@heroicons/react/24/outline";
-import { rewardSystemData } from "@/data/rewardSystemData";
+import { rewardSystemData } from "../data/reward-system-data";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -25,8 +25,11 @@ const sections = [
   { id: "introduction", name: "Introduction", icon: DocumentTextIcon },
   { id: "objectives", name: "Objectives", icon: CheckCircleIcon },
   { id: "scope", name: "Scope", icon: GlobeAltIcon },
-  { id: "equity", name: "Equity Framework", icon: CurrencyDollarIcon },
-  { id: "incentives", name: "Incentives", icon: UserGroupIcon },
+  {
+    id: "compensation",
+    name: "Compensation Framework",
+    icon: CurrencyDollarIcon,
+  },
   { id: "review", name: "Review Process", icon: ClipboardDocumentListIcon },
   { id: "implementation", name: "Implementation", icon: CogIcon },
   { id: "compliance", name: "Compliance", icon: ShieldCheckIcon },
@@ -221,286 +224,558 @@ export default function RewardSystemPage() {
           </div>
         );
 
-      case "equity":
+      case "compensation":
         return (
           <div className="prose prose-slate max-w-none space-y-8">
             <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-6 border border-emerald-200">
               <p className="text-lg text-slate-700 leading-relaxed">
-                {rewardSystemData.equity.framework}
+                {rewardSystemData.boardCompensation.framework}
               </p>
             </div>
 
-            {/* Board and EMT Equity Details */}
-            <div className="grid lg:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
-                  <UserGroupIcon className="w-5 h-5 mr-2 text-blue-600" />
-                  Board of Directors
-                </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-medium text-slate-600">
-                      Base Equity:
-                    </span>
-                    <span className="text-slate-900">
-                      {rewardSystemData.equity.board.base}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-medium text-slate-600">
-                      Performance-Based:
-                    </span>
-                    <span className="text-slate-900">
-                      {rewardSystemData.equity.board.performance}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-2">
-                    <span className="font-medium text-slate-600">Cap:</span>
-                    <span className="text-slate-900 font-semibold">
-                      {rewardSystemData.equity.board.cap}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
-                  <CogIcon className="w-5 h-5 mr-2 text-emerald-600" />
-                  EMT Members
-                </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-medium text-slate-600">
-                      Base Equity:
-                    </span>
-                    <span className="text-slate-900">
-                      {rewardSystemData.equity.emt.base}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-medium text-slate-600">
-                      Project Champion:
-                    </span>
-                    <span className="text-slate-900">
-                      {rewardSystemData.equity.emt.projectChampion}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-medium text-slate-600">
-                      Performance-Based:
-                    </span>
-                    <span className="text-slate-900">
-                      {rewardSystemData.equity.emt.performance}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-2">
-                    <span className="font-medium text-slate-600">Cap:</span>
-                    <span className="text-slate-900 font-semibold">
-                      {rewardSystemData.equity.emt.cap}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Equity Conversion */}
-            <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
-              <h3 className="text-lg font-semibold text-purple-900 mb-3">
-                Equity Conversion for Vendors
+            {/* Board Compensation */}
+            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                <UserGroupIcon className="w-5 h-5 mr-2 text-blue-600" />
+                Board of Directors Compensation
               </h3>
-              <p className="text-slate-700">
-                {rewardSystemData.equity.conversion}
-              </p>
-            </div>
 
-            {/* Vesting Schedule Table */}
-            <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-              <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
-                <h3 className="text-lg font-semibold text-slate-900">
-                  Equity Vesting Schedules
-                </h3>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-slate-200">
-                  <thead className="bg-slate-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                        Group
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                        Equity Type
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                        Vesting Period
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                        Schedule Details
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                        Cliff Period
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                        Acceleration Triggers
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-slate-200">
-                    {rewardSystemData.equity.vesting.table.map(
-                      (row: any, index: number) => (
-                        <tr key={index} className="hover:bg-slate-50">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-                            {row.group}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700">
-                            {row.type}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700">
-                            {row.period}
-                          </td>
-                          <td className="px-6 py-4 text-sm text-slate-700">
-                            {row.details}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700">
-                            {row.cliff}
-                          </td>
-                          <td className="px-6 py-4 text-sm text-slate-700">
-                            {row.triggers}
-                          </td>
-                        </tr>
+              <div className="space-y-6">
+                {/* Board Sitting Allowances */}
+                <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                  <h4 className="font-semibold text-blue-900 mb-3">
+                    Board Sitting Allowances
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between items-center py-2 border-b border-blue-100">
+                      <span className="font-medium text-slate-600">
+                        Regular Meetings:
+                      </span>
+                      <span className="text-slate-900">
+                        {
+                          rewardSystemData.boardCompensation.sittingAllowances
+                            .regularMeetings
+                        }
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-blue-100">
+                      <span className="font-medium text-slate-600">
+                        Special Meetings:
+                      </span>
+                      <span className="text-slate-900">
+                        {
+                          rewardSystemData.boardCompensation.sittingAllowances
+                            .specialMeetings
+                        }
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="font-medium text-slate-600">
+                        Committee Work:
+                      </span>
+                      <span className="text-slate-900">
+                        {
+                          rewardSystemData.boardCompensation.sittingAllowances
+                            .committeeWork
+                        }
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Board Fees */}
+                <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                  <h4 className="font-semibold text-blue-900 mb-3">
+                    Board Fees (Annual Retainer)
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between items-center py-2 border-b border-blue-100">
+                      <span className="font-medium text-slate-600">
+                        Chairperson:
+                      </span>
+                      <span className="text-slate-900">
+                        {
+                          rewardSystemData.boardCompensation.boardFees
+                            .chairperson
+                        }
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-blue-100">
+                      <span className="font-medium text-slate-600">
+                        Vice Chairperson:
+                      </span>
+                      <span className="text-slate-900">
+                        {
+                          rewardSystemData.boardCompensation.boardFees
+                            .viceChairperson
+                        }
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-blue-100">
+                      <span className="font-medium text-slate-600">
+                        Treasurer:
+                      </span>
+                      <span className="text-slate-900">
+                        {rewardSystemData.boardCompensation.boardFees.treasurer}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-blue-100">
+                      <span className="font-medium text-slate-600">
+                        Secretary:
+                      </span>
+                      <span className="text-slate-900">
+                        {rewardSystemData.boardCompensation.boardFees.secretary}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="font-medium text-slate-600">
+                        General Members:
+                      </span>
+                      <span className="text-slate-900">
+                        {rewardSystemData.boardCompensation.boardFees.members}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Performance Bonus */}
+                <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                  <h4 className="font-semibold text-blue-900 mb-2">
+                    Performance Bonus
+                  </h4>
+                  <p className="text-slate-700 text-sm mb-3">
+                    {rewardSystemData.boardCompensation.performanceBonus.amount}
+                  </p>
+                  <div className="space-y-1">
+                    <p className="font-medium text-slate-700 text-sm">
+                      Criteria:
+                    </p>
+                    {rewardSystemData.boardCompensation.performanceBonus.criteria.map(
+                      (criterion: string, index: number) => (
+                        <div key={index} className="flex items-start space-x-2">
+                          <CheckCircleIcon className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                          <span className="text-slate-600 text-sm">
+                            {criterion}
+                          </span>
+                        </div>
                       )
                     )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Additional Equity Info */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-red-50 rounded-xl p-6 border border-red-200">
-                <h3 className="text-lg font-semibold text-red-900 mb-3">
-                  Forfeiture Policy
-                </h3>
-                <p className="text-slate-700">
-                  {rewardSystemData.equity.forfeiture}
-                </p>
-              </div>
-              <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
-                <h3 className="text-lg font-semibold text-yellow-900 mb-3">
-                  Tax Considerations
-                </h3>
-                <p className="text-slate-700">{rewardSystemData.equity.tax}</p>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "incentives":
-        return (
-          <div className="prose prose-slate max-w-none space-y-8">
-            <div className="grid lg:grid-cols-2 gap-6">
-              {/* Board Incentives */}
-              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
-                  <UserGroupIcon className="w-5 h-5 mr-2 text-blue-600" />
-                  Board of Directors
-                </h3>
-                <div className="space-y-4">
-                  <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
-                    <h4 className="font-semibold text-blue-900 mb-2">
-                      Honorariums
-                    </h4>
-                    <p className="text-slate-700 text-sm">
-                      {rewardSystemData.incentives.board.honorariums}
-                    </p>
-                  </div>
-                  <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
-                    <h4 className="font-semibold text-blue-900 mb-2">
-                      Milestone Criteria
-                    </h4>
-                    <p className="text-slate-700 text-sm">
-                      {rewardSystemData.incentives.board.milestone}
-                    </p>
-                  </div>
-                  <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
-                    <h4 className="font-semibold text-blue-900 mb-2">
-                      Recognition
-                    </h4>
-                    <p className="text-slate-700 text-sm">
-                      {rewardSystemData.incentives.board.recognition}
-                    </p>
                   </div>
                 </div>
-              </div>
 
-              {/* EMT Incentives */}
-              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
-                  <CogIcon className="w-5 h-5 mr-2 text-emerald-600" />
-                  EMT Members
-                </h3>
-                <div className="space-y-4">
-                  <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
-                    <h4 className="font-semibold text-emerald-900 mb-2">
-                      Milestone Bonuses
-                    </h4>
-                    <p className="text-slate-700 text-sm">
-                      {rewardSystemData.incentives.emt.bonuses}
-                    </p>
-                  </div>
-                  <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
-                    <h4 className="font-semibold text-emerald-900 mb-2">
-                      Professional Development
-                    </h4>
-                    <p className="text-slate-700 text-sm">
-                      {rewardSystemData.incentives.emt.development}
-                    </p>
-                  </div>
-                  <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
-                    <h4 className="font-semibold text-emerald-900 mb-2">
+                {/* Recognition & Disbursement */}
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                    <h4 className="font-semibold text-blue-900 mb-2">
                       Recognition
                     </h4>
                     <p className="text-slate-700 text-sm">
-                      {rewardSystemData.incentives.emt.recognition}
+                      {rewardSystemData.boardCompensation.recognition}
+                    </p>
+                  </div>
+                  <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                    <h4 className="font-semibold text-blue-900 mb-2">
+                      Disbursement
+                    </h4>
+                    <p className="text-slate-700 text-sm">
+                      {rewardSystemData.boardCompensation.disbursement}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Project-Specific Criteria */}
-            <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-              <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
-                <h3 className="text-lg font-semibold text-slate-900">
-                  Project-Specific Criteria
-                </h3>
-              </div>
-              <div className="p-6 space-y-4">
-                {Object.entries(
-                  rewardSystemData.incentives.emt.projectCriteria
-                ).map(([project, criteria]) => (
-                  <div
-                    key={project}
-                    className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg p-4 border border-slate-200"
-                  >
-                    <h4 className="font-semibold text-slate-900 mb-2 capitalize">
-                      {project.replace(/([A-Z])/g, " $1").trim()}
-                    </h4>
-                    <p className="text-slate-700 text-sm">
-                      {criteria as string}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Disbursement Info */}
-            <div className="bg-indigo-50 rounded-xl p-6 border border-indigo-200">
-              <h3 className="text-lg font-semibold text-indigo-900 mb-3">
-                Incentive Disbursement
+            {/* EMT Compensation */}
+            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                <CogIcon className="w-5 h-5 mr-2 text-emerald-600" />
+                EMT Compensation
               </h3>
-              <p className="text-slate-700">
-                {rewardSystemData.incentives.disbursement}
-              </p>
+
+              <div className="space-y-6">
+                {/* Framework */}
+                <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
+                  <p className="text-slate-700">
+                    {rewardSystemData.emtCompensation.framework}
+                  </p>
+                </div>
+
+                {/* Project Milestone Compensation */}
+                <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
+                  <h4 className="font-semibold text-emerald-900 mb-3">
+                    Project Milestone Compensation
+                  </h4>
+                  <p className="text-slate-700 text-sm mb-2">
+                    {
+                      rewardSystemData.emtCompensation
+                        .projectMilestoneCompensation.structure
+                    }
+                  </p>
+                  <div className="space-y-1 text-sm">
+                    <p className="text-slate-700">
+                      <span className="font-medium">Payment Range:</span>{" "}
+                      {
+                        rewardSystemData.emtCompensation
+                          .projectMilestoneCompensation.paymentRange
+                      }
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">
+                        Project Champion Bonus:
+                      </span>{" "}
+                      {
+                        rewardSystemData.emtCompensation
+                          .projectMilestoneCompensation.projectChampionBonus
+                      }
+                    </p>
+                  </div>
+                </div>
+
+                {/* Milestones by Project */}
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-slate-900">
+                    Milestones by Project
+                  </h4>
+
+                  {/* Skillnovate */}
+                  <div className="bg-purple-50 rounded-lg p-4 border border-purple-100">
+                    <h5 className="font-semibold text-purple-900 mb-3">
+                      Skillnovate
+                    </h5>
+                    <div className="space-y-2">
+                      {rewardSystemData.emtCompensation.milestonesByProject.skillnovate.map(
+                        (milestone: any, index: number) => (
+                          <div
+                            key={index}
+                            className="bg-white rounded p-3 border border-purple-100"
+                          >
+                            <div className="flex justify-between items-start">
+                              <span className="font-medium text-slate-700 text-sm">
+                                {milestone.milestone}
+                              </span>
+                              <span className="text-purple-700 font-semibold text-sm">
+                                {milestone.compensation}
+                              </span>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+
+                  {/* KEIA */}
+                  <div className="bg-indigo-50 rounded-lg p-4 border border-indigo-100">
+                    <h5 className="font-semibold text-indigo-900 mb-3">KEIA</h5>
+                    <div className="space-y-2">
+                      {rewardSystemData.emtCompensation.milestonesByProject.keia.map(
+                        (milestone: any, index: number) => (
+                          <div
+                            key={index}
+                            className="bg-white rounded p-3 border border-indigo-100"
+                          >
+                            <div className="flex justify-between items-start">
+                              <span className="font-medium text-slate-700 text-sm">
+                                {milestone.milestone}
+                              </span>
+                              <span className="text-indigo-700 font-semibold text-sm">
+                                {milestone.compensation}
+                              </span>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Rike Marketplace */}
+                  <div className="bg-cyan-50 rounded-lg p-4 border border-cyan-100">
+                    <h5 className="font-semibold text-cyan-900 mb-3">
+                      Rike Marketplace
+                    </h5>
+                    <div className="space-y-2">
+                      {rewardSystemData.emtCompensation.milestonesByProject.rikeMarketplace.map(
+                        (milestone: any, index: number) => (
+                          <div
+                            key={index}
+                            className="bg-white rounded p-3 border border-cyan-100"
+                          >
+                            <div className="flex justify-between items-start">
+                              <span className="font-medium text-slate-700 text-sm">
+                                {milestone.milestone}
+                              </span>
+                              <span className="text-cyan-700 font-semibold text-sm">
+                                {milestone.compensation}
+                              </span>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+
+                  {/* AroFarmer */}
+                  <div className="bg-green-50 rounded-lg p-4 border border-green-100">
+                    <h5 className="font-semibold text-green-900 mb-3">
+                      AroFarmer
+                    </h5>
+                    <div className="space-y-2">
+                      {rewardSystemData.emtCompensation.milestonesByProject.arofarmer.map(
+                        (milestone: any, index: number) => (
+                          <div
+                            key={index}
+                            className="bg-white rounded p-3 border border-green-100"
+                          >
+                            <div className="flex justify-between items-start">
+                              <span className="font-medium text-slate-700 text-sm">
+                                {milestone.milestone}
+                              </span>
+                              <span className="text-green-700 font-semibold text-sm">
+                                {milestone.compensation}
+                              </span>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Patch Africa */}
+                  <div className="bg-teal-50 rounded-lg p-4 border border-teal-100">
+                    <h5 className="font-semibold text-teal-900 mb-3">
+                      Patch Africa
+                    </h5>
+                    <div className="space-y-2">
+                      {rewardSystemData.emtCompensation.milestonesByProject.patchAfrica.map(
+                        (milestone: any, index: number) => (
+                          <div
+                            key={index}
+                            className="bg-white rounded p-3 border border-teal-100"
+                          >
+                            <div className="flex justify-between items-start">
+                              <span className="font-medium text-slate-700 text-sm">
+                                {milestone.milestone}
+                              </span>
+                              <span className="text-teal-700 font-semibold text-sm">
+                                {milestone.compensation}
+                              </span>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Performance Bonuses */}
+                <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
+                  <h4 className="font-semibold text-emerald-900 mb-3">
+                    Performance Bonuses
+                  </h4>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-slate-700 text-sm mb-2">
+                        <span className="font-medium">Annual:</span>{" "}
+                        {
+                          rewardSystemData.emtCompensation.performanceBonuses
+                            .annual
+                        }
+                      </p>
+                      <div className="space-y-1">
+                        <p className="font-medium text-slate-700 text-sm">
+                          Criteria:
+                        </p>
+                        {rewardSystemData.emtCompensation.performanceBonuses.criteria.map(
+                          (criterion: string, index: number) => (
+                            <div
+                              key={index}
+                              className="flex items-start space-x-2"
+                            >
+                              <CheckCircleIcon className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                              <span className="text-slate-600 text-sm">
+                                {criterion}
+                              </span>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                    <div className="pt-2 border-t border-emerald-200">
+                      <p className="text-slate-700 text-sm">
+                        <span className="font-medium">Quarterly:</span>{" "}
+                        {
+                          rewardSystemData.emtCompensation.performanceBonuses
+                            .quarterly
+                        }
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Professional Development */}
+                <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
+                  <h4 className="font-semibold text-emerald-900 mb-3">
+                    Professional Development
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <p className="text-slate-700">
+                      <span className="font-medium">Training:</span>{" "}
+                      {
+                        rewardSystemData.emtCompensation.professionalDevelopment
+                          .training
+                      }
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">Conferences:</span>{" "}
+                      {
+                        rewardSystemData.emtCompensation.professionalDevelopment
+                          .conferences
+                      }
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">Mentorship:</span>{" "}
+                      {
+                        rewardSystemData.emtCompensation.professionalDevelopment
+                          .mentorship
+                      }
+                    </p>
+                  </div>
+                </div>
+
+                {/* Recognition */}
+                <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
+                  <h4 className="font-semibold text-emerald-900 mb-3">
+                    Recognition
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <p className="text-slate-700">
+                      <span className="font-medium">Awards:</span>{" "}
+                      {rewardSystemData.emtCompensation.recognition.awards}
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">Certificates:</span>{" "}
+                      {
+                        rewardSystemData.emtCompensation.recognition
+                          .certificates
+                      }
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">Publicity:</span>{" "}
+                      {rewardSystemData.emtCompensation.recognition.publicity}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Disbursement */}
+                <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
+                  <h4 className="font-semibold text-emerald-900 mb-2">
+                    Disbursement
+                  </h4>
+                  <p className="text-slate-700 text-sm">
+                    {rewardSystemData.emtCompensation.disbursement}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Vendor Services */}
+            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+                <CurrencyDollarIcon className="w-5 h-5 mr-2 text-amber-600" />
+                Vendor Services Compensation
+              </h3>
+
+              <div className="space-y-6">
+                <div className="bg-amber-50 rounded-lg p-4 border border-amber-100">
+                  <p className="text-slate-700 mb-4">
+                    {rewardSystemData.vendorServices.framework}
+                  </p>
+                </div>
+
+                {/* Payment Structure */}
+                <div className="bg-amber-50 rounded-lg p-4 border border-amber-100">
+                  <h4 className="font-semibold text-amber-900 mb-3">
+                    Payment Structure
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <p className="text-slate-700">
+                      <span className="font-medium">Standard:</span>{" "}
+                      {
+                        rewardSystemData.vendorServices.paymentStructure
+                          .standard
+                      }
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">Milestone Payments:</span>{" "}
+                      {
+                        rewardSystemData.vendorServices.paymentStructure
+                          .milestonePayments
+                      }
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">Example:</span>{" "}
+                      {rewardSystemData.vendorServices.paymentStructure.example}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Performance Incentives */}
+                <div className="bg-amber-50 rounded-lg p-4 border border-amber-100">
+                  <h4 className="font-semibold text-amber-900 mb-3">
+                    Performance Incentives
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <p className="text-slate-700">
+                      <span className="font-medium">Early Completion:</span>{" "}
+                      {
+                        rewardSystemData.vendorServices.performanceIncentives
+                          .earlyCompletion
+                      }
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">Quality Excellence:</span>{" "}
+                      {
+                        rewardSystemData.vendorServices.performanceIncentives
+                          .qualityExcellence
+                      }
+                    </p>
+                    <p className="text-slate-700">
+                      <span className="font-medium">Innovation Bonus:</span>{" "}
+                      {
+                        rewardSystemData.vendorServices.performanceIncentives
+                          .innovationBonus
+                      }
+                    </p>
+                  </div>
+                </div>
+
+                {/* Tech Partnership */}
+                <div className="bg-amber-50 rounded-lg p-4 border border-amber-100">
+                  <h4 className="font-semibold text-amber-900 mb-3">
+                    Tech Partnership
+                  </h4>
+                  <p className="text-slate-700 text-sm mb-3">
+                    {
+                      rewardSystemData.vendorServices.techPartnership
+                        .description
+                    }
+                  </p>
+                  <div className="space-y-1">
+                    <p className="font-medium text-slate-700 text-sm">
+                      Benefits:
+                    </p>
+                    {rewardSystemData.vendorServices.techPartnership.benefits.map(
+                      (benefit: string, index: number) => (
+                        <div key={index} className="flex items-start space-x-2">
+                          <CheckCircleIcon className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+                          <span className="text-slate-600 text-sm">
+                            {benefit}
+                          </span>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -638,13 +913,37 @@ export default function RewardSystemPage() {
 
   return (
     <div>
-      {/* Header */}
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8 ">
+        <div className="flex flex-col lg:flex-row gap-8">
           {/* Desktop Sidebar Navigation - Fixed height with scroll */}
           <aside className="hidden lg:block w-80 flex-shrink-0">
             <div className="h-full flex flex-col space-y-6">
+              {/* Document Info Card */}
+              <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex-shrink-0">
+                <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                  <h3 className="font-semibold text-slate-900">
+                    Document Information
+                  </h3>
+                </div>
+                <div className="p-6 space-y-3 text-sm">
+                  {Object.entries(rewardSystemData.documentInfo).map(
+                    ([key, value]) => (
+                      <div
+                        key={key}
+                        className="flex justify-between items-start"
+                      >
+                        <span className="font-medium text-slate-600 capitalize">
+                          {key.replace(/([A-Z])/g, " $1").trim()}:
+                        </span>
+                        <span className="text-slate-900 text-right max-w-48">
+                          {value}
+                        </span>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+
               {/* Navigation - Scrollable */}
               <nav className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex-1 flex flex-col">
                 <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex-shrink-0">
@@ -680,31 +979,6 @@ export default function RewardSystemPage() {
                   })}
                 </div>
               </nav>
-              {/* Document Info Card */}
-              <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex-shrink-0">
-                <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
-                  <h3 className="font-semibold text-slate-900">
-                    Document Information
-                  </h3>
-                </div>
-                <div className="p-6 space-y-3 text-sm">
-                  {Object.entries(rewardSystemData.documentInfo).map(
-                    ([key, value]) => (
-                      <div
-                        key={key}
-                        className="flex justify-between items-start"
-                      >
-                        <span className="font-medium text-slate-600 capitalize">
-                          {key.replace(/([A-Z])/g, " $1").trim()}:
-                        </span>
-                        <span className="text-slate-900 text-right max-w-48">
-                          {value}
-                        </span>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
             </div>
           </aside>
 
