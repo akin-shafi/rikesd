@@ -26,6 +26,29 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
     });
   };
 
+  // Helper to normalize description to PortableText format
+  const getDescriptionValue = (description: any) => {
+    if (typeof description === "string") {
+      // Split string by newlines to create separate paragraph blocks
+      return description
+        .split("\n")
+        .filter((line: string) => line.trim() !== "") // Remove empty lines
+        .map((line: string) => ({
+          _type: "block",
+          style: "normal" as const,
+          children: [
+            {
+              _type: "span",
+              text: line,
+              marks: [], // Add marks here if needed for bold/italic in strings
+            },
+          ],
+        }));
+    }
+    // If already an array (from Sanity rich text), use as-is
+    return description || [];
+  };
+
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 overflow-hidden">
       {event.flyer && (
@@ -103,17 +126,7 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
         </div>
 
         <div className="prose prose-green max-w-none text-gray-600 mb-6">
-          <PortableText value={typeof event.description === "string"
-            ? [
-                {
-                  _type: "block",
-                  children: [{ _type: "span", text: event.description }],
-                  markDefs: [],
-                  style: "normal",
-                },
-              ]
-            : event.description}
-          />
+          <PortableText value={getDescriptionValue(event.description)} />
         </div>
 
         {Array.isArray(event.agenda) && event.agenda.length > 0 && (

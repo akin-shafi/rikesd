@@ -65,12 +65,12 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
-  name: 'description',
-  title: 'Description',
-  type: 'array',
-  of: [{ type: 'block' }],
-  validation: Rule => Rule.required(),
-}),
+      name: 'description',
+      title: 'Description',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: Rule => Rule.required(),
+    }),
 
     defineField({
       name: 'agenda',
