@@ -26,27 +26,82 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
     });
   };
 
-  // Helper to normalize description to PortableText format
-  const getDescriptionValue = (description: any) => {
+  // Enhanced helper to normalize description: handles strings and splits single blocks with \n\n into multiple paragraphs
+  const normalizeDescription = (description: any): any[] => {
+    if (!description) return [];
+
     if (typeof description === "string") {
-      // Split string by newlines to create separate paragraph blocks
-      return description
-        .split("\n")
-        .filter((line: string) => line.trim() !== "") // Remove empty lines
-        .map((line: string) => ({
-          _type: "block",
-          style: "normal" as const,
-          children: [
-            {
-              _type: "span",
-              text: line,
-              marks: [], // Add marks here if needed for bold/italic in strings
-            },
-          ],
-        }));
+      // Split string on double newlines (paragraphs) and create blocks
+      const paragraphs = description
+        .split(/\n{2,}/)
+        .map((p: string) => p.trim())
+        .filter(Boolean);
+      return paragraphs.map((para: string) => ({
+        _type: "block",
+        style: "normal" as const,
+        children: [
+          {
+            _type: "span",
+            text: para,
+            marks: [],
+          },
+        ],
+        markDefs: [],
+      }));
     }
-    // If already an array (from Sanity rich text), use as-is
-    return description || [];
+
+    // If array, check for single blocks with \n\n in text and split them
+    if (Array.isArray(description)) {
+      const newBlocks: any[] = [];
+      description.forEach((block: any) => {
+        if (block?._type === "block" && block.children) {
+          // Assume simple structure: collect text from spans and split if needed
+          // For pasted content, often single span per block
+          block.children.forEach((child: any) => {
+            if (
+              child?._type === "span" &&
+              typeof child.text === "string" &&
+              child.text.includes("\n")
+            ) {
+              // Split on double \n for paragraphs (ignores single \n as line breaks within para)
+              const parts = child.text
+                .split(/\n{2,}/)
+                .map((part: string) => part.trim())
+                .filter(Boolean);
+              parts.forEach((part: string, i: number) => {
+                newBlocks.push({
+                  _type: "block",
+                  style: block.style || "normal",
+                  markDefs: block.markDefs || [],
+                  children: [
+                    {
+                      _type: "span",
+                      text: part,
+                      marks: child.marks || [],
+                      _key: child._key ? `${child._key}-split-${i}` : undefined,
+                    },
+                  ],
+                  _key: block._key
+                    ? `${block._key}-split-${newBlocks.length}`
+                    : undefined,
+                });
+              });
+            } else {
+              // Non-splittable child: add as new block or keep
+              newBlocks.push({
+                ...block,
+                children: [child],
+              });
+            }
+          });
+        } else {
+          newBlocks.push(block);
+        }
+      });
+      return newBlocks;
+    }
+
+    return [];
   };
 
   return (
@@ -125,8 +180,8 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
           )}
         </div>
 
-        <div className="prose prose-green max-w-none text-gray-600 mb-6">
-          <PortableText value={getDescriptionValue(event.description)} />
+        <div className="prose prose-green max-w-none text-gray-600 mb-6 prose-p:mb-4">
+          <PortableText value={normalizeDescription(event.description)} />
         </div>
 
         {Array.isArray(event.agenda) && event.agenda.length > 0 && (
