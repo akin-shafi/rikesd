@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -27,7 +26,7 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
     });
   };
 
-  // Fixed normalizer: Better handling for arrays with single/multiple spans
+  // Simplified normalizer: Only handle plain strings; for arrays, pass through (let pre-line handle \n)
   const normalizeDescription = (description: any): any[] => {
     if (!description) return [];
 
@@ -50,86 +49,27 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
       }));
     }
 
-    if (Array.isArray(description)) {
-      return description.flatMap((block: any) => {
-        if (block?._type !== "block" || !Array.isArray(block.children)) {
-          return [block];
-        }
-
-        // Check if block needs splitting (has \n\n in any span text)
-        const needsSplit = block.children.some(
-          (child: any) =>
-            child?._type === "span" &&
-            typeof child.text === "string" &&
-            child.text.includes("\n\n")
-        );
-
-        if (!needsSplit) {
-          return [block];
-        }
-
-        // For simplicity, assume blocks have spans with text; collect all text and split
-        // (If complex marks across lines, this approximates; re-edit in Studio for precision)
-        const allText = block.children
-          .filter(
-            (child: any) =>
-              child._type === "span" && typeof child.text === "string"
-          )
-          .map((child: any) => child.text)
-          .join("\n"); // Join spans with \n if multiple
-
-        const parts = allText
-          .split(/\n{2,}/)
-          .map((part: string) => part.trim())
-          .filter(Boolean);
-
-        // Use first span's marks as base (common for uniform styling)
-        const baseMarks =
-          block.children.find((c: any) => c._type === "span")?.marks || [];
-
-        return parts.map((part: string, i: number) => ({
-          _type: "block",
-          style: block.style || "normal",
-          markDefs: block.markDefs || [],
-          children: [
-            {
-              _type: "span",
-              text: part,
-              marks: baseMarks, // Preserves bold/italic if uniform
-              _key: `span-${block._key || "block"}-${i}`,
-            },
-          ],
-          _key: `${block._key || "block"}-p${i}`,
-        }));
-      });
-    }
-
-    return [];
+    // For arrays (rich text), return as-is; custom renderer will handle \n via CSS
+    return Array.isArray(description) ? description : [];
   };
 
-  // Custom components to handle intra-paragraph line breaks (single \n as <br>)
+  // Custom components: Use {children} to preserve marks (bold/italic); whitespace-pre-line for \n handling
   const ptComponents = {
     block: ({ node, children }: any) => {
       if (node.style === "normal") {
-        // Flatten children to strings, replace single \n with <br />, double already split
-        const content = React.Children.toArray(children)
-          .map((child: any) => (typeof child === "string" ? child : ""))
-          .join("")
-          .replace(/\n/g, "<br />"); // Single \n to <br>
         return (
-          <p
-            className="mb-4 leading-relaxed whitespace-pre-line"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          <p className="mb-4 leading-relaxed whitespace-pre-line">{children}</p>
         );
       }
-      // Fallback for other styles
+      // Fallback for other styles (h1, blockquote, etc.)
       return <div className="mb-4">{children}</div>;
     },
     marks: {
-      strong: ({ children }: any) => <strong>{children}</strong>,
-      em: ({ children }: any) => <em>{children}</em>,
-      // Add more if needed
+      strong: ({ children }: any) => (
+        <strong className="font-bold">{children}</strong>
+      ),
+      em: ({ children }: any) => <em className="italic">{children}</em>,
+      // Add link, etc., if needed
     },
   };
 
@@ -209,7 +149,7 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
           )}
         </div>
 
-        <div className="max-w-none text-gray-600 mb-6 space-y-4">
+        <div className="max-w-none text-gray-600 mb-6">
           <PortableText
             value={normalizeDescription(event.description)}
             components={ptComponents}
