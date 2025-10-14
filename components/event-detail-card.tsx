@@ -26,12 +26,11 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
     });
   };
 
-  // Enhanced helper to normalize description: handles strings and splits single blocks with \n\n into multiple paragraphs
+  // Fixed normalizer: Better handling for arrays with single/multiple spans
   const normalizeDescription = (description: any): any[] => {
     if (!description) return [];
 
     if (typeof description === "string") {
-      // Split string on double newlines (paragraphs) and create blocks
       const paragraphs = description
         .split(/\n{2,}/)
         .map((p: string) => p.trim())
@@ -50,58 +49,87 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
       }));
     }
 
-    // If array, check for single blocks with \n\n in text and split them
     if (Array.isArray(description)) {
-      const newBlocks: any[] = [];
-      description.forEach((block: any) => {
-        if (block?._type === "block" && block.children) {
-          // Assume simple structure: collect text from spans and split if needed
-          // For pasted content, often single span per block
-          block.children.forEach((child: any) => {
-            if (
-              child?._type === "span" &&
-              typeof child.text === "string" &&
-              child.text.includes("\n")
-            ) {
-              // Split on double \n for paragraphs (ignores single \n as line breaks within para)
-              const parts = child.text
-                .split(/\n{2,}/)
-                .map((part: string) => part.trim())
-                .filter(Boolean);
-              parts.forEach((part: string, i: number) => {
-                newBlocks.push({
-                  _type: "block",
-                  style: block.style || "normal",
-                  markDefs: block.markDefs || [],
-                  children: [
-                    {
-                      _type: "span",
-                      text: part,
-                      marks: child.marks || [],
-                      _key: child._key ? `${child._key}-split-${i}` : undefined,
-                    },
-                  ],
-                  _key: block._key
-                    ? `${block._key}-split-${newBlocks.length}`
-                    : undefined,
-                });
-              });
-            } else {
-              // Non-splittable child: add as new block or keep
-              newBlocks.push({
-                ...block,
-                children: [child],
-              });
-            }
-          });
-        } else {
-          newBlocks.push(block);
+      return description.flatMap((block: any) => {
+        if (block?._type !== "block" || !Array.isArray(block.children)) {
+          return [block];
         }
+
+        // Check if block needs splitting (has \n\n in any span text)
+        const needsSplit = block.children.some(
+          (child: any) =>
+            child?._type === "span" &&
+            typeof child.text === "string" &&
+            child.text.includes("\n\n")
+        );
+
+        if (!needsSplit) {
+          return [block];
+        }
+
+        // For simplicity, assume blocks have spans with text; collect all text and split
+        // (If complex marks across lines, this approximates; re-edit in Studio for precision)
+        const allText = block.children
+          .filter(
+            (child: any) =>
+              child._type === "span" && typeof child.text === "string"
+          )
+          .map((child: any) => child.text)
+          .join("\n"); // Join spans with \n if multiple
+
+        const parts = allText
+          .split(/\n{2,}/)
+          .map((part: string) => part.trim())
+          .filter(Boolean);
+
+        // Use first span's marks as base (common for uniform styling)
+        const baseMarks =
+          block.children.find((c: any) => c._type === "span")?.marks || [];
+
+        return parts.map((part: string, i: number) => ({
+          _type: "block",
+          style: block.style || "normal",
+          markDefs: block.markDefs || [],
+          children: [
+            {
+              _type: "span",
+              text: part,
+              marks: baseMarks, // Preserves bold/italic if uniform
+              _key: `span-${block._key || "block"}-${i}`,
+            },
+          ],
+          _key: `${block._key || "block"}-p${i}`,
+        }));
       });
-      return newBlocks;
     }
 
     return [];
+  };
+
+  // Custom components to handle intra-paragraph line breaks (single \n as <br>)
+  const ptComponents = {
+    block: ({ node, children }: any) => {
+      if (node.style === "normal") {
+        // Flatten children to strings, replace single \n with <br />, double already split
+        const content = React.Children.toArray(children)
+          .map((child: any) => (typeof child === "string" ? child : ""))
+          .join("")
+          .replace(/\n/g, "<br />"); // Single \n to <br>
+        return (
+          <p
+            className="mb-4 leading-relaxed whitespace-pre-line"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        );
+      }
+      // Fallback for other styles
+      return <div className="mb-4">{children}</div>;
+    },
+    marks: {
+      strong: ({ children }: any) => <strong>{children}</strong>,
+      em: ({ children }: any) => <em>{children}</em>,
+      // Add more if needed
+    },
   };
 
   return (
@@ -180,8 +208,11 @@ export default function EventDetailCard({ event }: EventDetailCardProps) {
           )}
         </div>
 
-        <div className="prose prose-green max-w-none text-gray-600 mb-6 prose-p:mb-4">
-          <PortableText value={normalizeDescription(event.description)} />
+        <div className="max-w-none text-gray-600 mb-6 space-y-4">
+          <PortableText
+            value={normalizeDescription(event.description)}
+            components={ptComponents}
+          />
         </div>
 
         {Array.isArray(event.agenda) && event.agenda.length > 0 && (
