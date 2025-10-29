@@ -176,7 +176,7 @@ export default function Footer() {
               <div className="flex items-start">
                 <MapPin className="w-4 h-4 text-gray-400 mt-1 mr-3 flex-shrink-0" />
                 <p className="text-gray-300 text-sm">
-                  123 Logan Street
+                  10 Lord Lugard Street Asokoro
                   <br />
                   Abuja, Nigeria
                 </p>
